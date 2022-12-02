@@ -124,6 +124,7 @@ export const createBrowserCompiler = (
   let compile = async (manifestChannel: WriteChannel<AssetsManifest>) => {
     let metafile: esbuild.Metafile;
     if (compiler === undefined) {
+      // @ts-expect-error - yeah i know, i disabled the incremental option
       compiler = await esbuild.build({
         ...esbuildConfig,
         metafile: true,
