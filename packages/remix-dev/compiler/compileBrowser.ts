@@ -126,7 +126,7 @@ export const createBrowserCompiler = (
       compiler = await esbuild.build({
         ...esbuildConfig,
         metafile: true,
-        incremental: true,
+        // incremental: true,
       });
       metafile = compiler.metafile!;
     } else {
