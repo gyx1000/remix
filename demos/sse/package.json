@@ -8,7 +8,8 @@
     "@remix-run/logger-middleware": "workspace:*",
     "@remix-run/node-fetch-server": "workspace:*",
     "@remix-run/sse": "workspace:*",
-    "@remix-run/html-template": "workspace:*"
+    "@remix-run/html-template": "workspace:*",
+    "@remix-run/interaction": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^24.6.0",

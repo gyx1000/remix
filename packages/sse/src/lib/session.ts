@@ -1,3 +1,15 @@
+import { TypedEventTarget } from '@remix-run/interaction'
+
+interface SseSessionEventMap {
+  disconnected: SseSessionEvent
+}
+
+class SseSessionEvent extends Event {
+  constructor(type: SseSessionEvent['type']) {
+    super(type)
+  }
+}
+
 export interface SseSessionOptions {
   padding?: boolean
   preamble?: boolean
@@ -6,16 +18,16 @@ export interface SseSessionOptions {
 }
 
 export function createSseSession(request: Request, options: SseSessionOptions) {
-  let controller = new AbortController()
   let signal = request.signal
   let { readable, writable } = new TransformStream()
   let writer = writable.getWriter()
   let connected = false
   let keepAliveInterval: ReturnType<typeof setInterval> | undefined
   let lastId = request.headers.get('last-event-id')
+  let events = new TypedEventTarget<SseSessionEventMap>()
 
   let cleanup = () => {
-    controller.abort()
+    events.dispatchEvent(new SseSessionEvent('disconnected'))
     connected = false
     if (keepAliveInterval) {
       clearInterval(keepAliveInterval)
@@ -52,8 +64,7 @@ export function createSseSession(request: Request, options: SseSessionOptions) {
   }
 
   connected = true
-  return {
-    signal: controller.signal,
+  return Object.assign(events, {
     stream: readable,
     push: (event: string, data: string, id: string = crypto.randomUUID()) => {
       if (!connected) throw new Error(`Could not push on disconnected session`)
@@ -69,5 +80,7 @@ export function createSseSession(request: Request, options: SseSessionOptions) {
     get connected() {
       return connected
     },
-  }
+  })
 }
+
+export type SseSession = ReturnType<typeof createSseSession>

@@ -1,16 +1,29 @@
-import { EventEmitter } from 'events'
-import type { createSseSession } from './session'
+import type { SseSession } from './session'
+import { TypedEventTarget } from '@remix-run/interaction'
+
+interface SseChannelEventMap {
+  register: SseChannelEvent
+  unregister: SseChannelEvent
+}
+
+class SseChannelEvent extends Event {
+  session: SseSession
+  constructor(type: SseChannelEvent['type'], session: SseSession) {
+    super(type)
+    this.session = session
+  }
+}
 
 export let createSseChannel = () => {
-  let sessions = new Set<ReturnType<typeof createSseSession>>()
-  let events = new EventEmitter()
+  let sessions = new Set<SseSession>()
+  let events = new TypedEventTarget<SseChannelEventMap>()
 
-  return {
-    events,
-    register: (session: ReturnType<typeof createSseSession>) => {
+  return Object.assign(events, {
+    register: (session: SseSession) => {
       let cleanup = () => {
+        session.removeEventListener('disconnected', cleanup)
         sessions.delete(session)
-        events.emit('session-unregister', session)
+        events.dispatchEvent(new SseChannelEvent('unregister', session))
       }
 
       if (sessions.has(session)) {
@@ -18,8 +31,8 @@ export let createSseChannel = () => {
         return
       }
       sessions.add(session)
-      events.emit('session-register', session)
-      session.events.on('disconnected', cleanup)
+      events.dispatchEvent(new SseChannelEvent('register', session))
+      session.addEventListener('disconnected', cleanup, { once: true })
     },
     broadcast: (event: string, data: string, id: string = crypto.randomUUID()) => {
       for (let session of sessions) {
@@ -30,5 +43,5 @@ export let createSseChannel = () => {
     get count() {
       return sessions.size
     },
-  }
+  })
 }

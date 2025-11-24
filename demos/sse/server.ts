@@ -2,9 +2,10 @@ import * as http from 'node:http'
 import { createRouter, route } from '@remix-run/fetch-router'
 import { createRequestListener } from '@remix-run/node-fetch-server'
 import { logger } from '@remix-run/logger-middleware'
-import { createSseSession } from '@remix-run/sse'
+import { createSseChannel, createSseSession } from '@remix-run/sse'
 import * as res from '@remix-run/fetch-router/response-helpers'
 import { html } from '@remix-run/html-template'
+import { on } from '@remix-run/interaction'
 
 let routes = route({
   home: '/',
@@ -13,6 +14,16 @@ let routes = route({
 
 let router = createRouter({
   middleware: [logger()],
+})
+
+let dummyChannel = createSseChannel()
+on(dummyChannel, {
+  register: (evt) => {
+    console.log(`Session register`, evt.session)
+  },
+  unregister: (evt) => {
+    console.log(`Session unregister`, evt.session)
+  },
 })
 
 router.map(routes, {
@@ -39,16 +50,19 @@ router.map(routes, {
       padding: true,
       preamble: true,
     })
-
+    dummyChannel.register(sse)
     let interval = setInterval(() => {
       console.log(`send message`)
       sse.push('message', JSON.stringify({ date: Date.now() }))
     }, 2_000)
 
-    sse.signal.addEventListener('abort', () => {
-      console.log(`cleanup`)
-      clearInterval(interval)
-    })
+    sse.addEventListener(
+      'disconnected',
+      () => {
+        clearInterval(interval)
+      },
+      { once: true },
+    )
 
     return res.sse(sse.stream)
   },
@@ -64,6 +78,6 @@ let server = http.createServer(
   }),
 )
 
-server.listen(44100, () => {
-  console.log(`Server listening on port 44100`)
+server.listen(6000, () => {
+  console.log(`Server listening on port 6000`)
 })

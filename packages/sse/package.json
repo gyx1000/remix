@@ -32,6 +32,7 @@
     }
   },
   "peerDependencies": {
+    "@remix-run/interaction": "workspace:^",
     "@remix-run/headers": "workspace:^"
   },
   "devDependencies": {
