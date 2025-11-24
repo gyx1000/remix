@@ -5,8 +5,8 @@ import * as res from '@remix-run/fetch-router/response-helpers'
 
 describe('Test sse endpoint', async () => {
   it('should abort request correctly', async (t) => {
-    t.plan(1)
-
+    t.plan(2)
+    let aborted = false
     let router = createRouter()
     router.get('/sse', async ({ request }) => {
       let sse = createSseSession(request, {})
@@ -16,7 +16,7 @@ describe('Test sse endpoint', async () => {
       }, 200)
 
       request.signal.addEventListener('abort', () => {
-        console.log('fully aborted !')
+        aborted = true
         clearInterval(interval)
       })
 
@@ -30,7 +30,6 @@ describe('Test sse endpoint', async () => {
       // force GC
       global.gc!()
       // client cancel the request
-      console.log('abort the request')
       ac.abort()
     })
 
@@ -47,5 +46,6 @@ describe('Test sse endpoint', async () => {
         reader.releaseLock()
       }
     }
+    t.assert.equal(aborted, true)
   })
 })
