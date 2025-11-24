@@ -1,5 +1,5 @@
 import type { SseSession } from './session'
-import { TypedEventTarget } from '@remix-run/interaction'
+import { on, TypedEventTarget } from '@remix-run/interaction'
 
 interface SseChannelEventMap {
   register: SseChannelEvent
@@ -21,7 +21,7 @@ export let createSseChannel = () => {
   return Object.assign(events, {
     register: (session: SseSession) => {
       let cleanup = () => {
-        session.removeEventListener('disconnected', cleanup)
+        dispose()
         sessions.delete(session)
         events.dispatchEvent(new SseChannelEvent('unregister', session))
       }
@@ -32,7 +32,12 @@ export let createSseChannel = () => {
       }
       sessions.add(session)
       events.dispatchEvent(new SseChannelEvent('register', session))
-      session.addEventListener('disconnected', cleanup, { once: true })
+      let dispose = on(session, {
+        disconnected: {
+          once: true,
+          listener: cleanup,
+        },
+      })
     },
     broadcast: (event: string, data: string, id: string = crypto.randomUUID()) => {
       for (let session of sessions) {

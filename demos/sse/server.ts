@@ -50,19 +50,25 @@ router.map(routes, {
       padding: true,
       preamble: true,
     })
+
     dummyChannel.register(sse)
+    let cleanup = () => {
+      console.log(`cleanup`)
+      clearInterval(interval)
+      dispose()
+    }
+
     let interval = setInterval(() => {
       console.log(`send message`)
       sse.push('message', JSON.stringify({ date: Date.now() }))
     }, 2_000)
 
-    sse.addEventListener(
-      'disconnected',
-      () => {
-        clearInterval(interval)
+    let dispose = on(sse, {
+      disconnected: {
+        once: true,
+        listener: cleanup,
       },
-      { once: true },
-    )
+    })
 
     return res.sse(sse.stream)
   },
