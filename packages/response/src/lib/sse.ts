@@ -1,4 +1,4 @@
-export function sse(body: ReadableStream, init?: ResponseInit): Response {
+export function createSseResponse(body: ReadableStream, init?: ResponseInit): Response {
   let headers = new Headers(init?.headers)
 
   headers.set('Content-Type', 'text/event-stream')

@@ -3,7 +3,8 @@ import { createRouter, route } from '@remix-run/fetch-router'
 import { createRequestListener } from '@remix-run/node-fetch-server'
 import { logger } from '@remix-run/logger-middleware'
 import { createSseChannel, createSseSession } from '@remix-run/sse'
-import * as res from '@remix-run/fetch-router/response-helpers'
+import { createSseResponse } from '@remix-run/response/sse'
+import { createHtmlResponse } from '@remix-run/response/html'
 import { html } from '@remix-run/html-template'
 import { on } from '@remix-run/interaction'
 
@@ -28,7 +29,7 @@ on(dummyChannel, {
 
 router.map(routes, {
   home: ({ request }) => {
-    return res.html(
+    return createHtmlResponse(
       html`<html>
         <head> </head>
         <body>
@@ -70,7 +71,7 @@ router.map(routes, {
       },
     })
 
-    return res.sse(sse.stream)
+    return createSseResponse(sse.stream)
   },
 })
 let server = http.createServer(

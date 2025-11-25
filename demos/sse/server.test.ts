@@ -1,7 +1,7 @@
 import { createRouter } from '@remix-run/fetch-router'
 import { createSseSession } from '@remix-run/sse'
 import { describe, it } from 'node:test'
-import * as res from '@remix-run/fetch-router/response-helpers'
+import { createSseResponse } from '@remix-run/response/sse'
 
 describe('Test sse endpoint', async () => {
   it('should abort request correctly', async (t) => {
@@ -20,7 +20,7 @@ describe('Test sse endpoint', async () => {
         clearInterval(interval)
       })
 
-      return res.sse(sse.stream)
+      return createSseResponse(sse.stream)
     })
 
     let ac = new AbortController()

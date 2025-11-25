@@ -22,6 +22,7 @@
     "./file": "./src/file.ts",
     "./html": "./src/html.ts",
     "./redirect": "./src/redirect.ts",
+    "./sse": "./src/sse.ts",
     "./package.json": "./package.json"
   },
   "publishConfig": {
