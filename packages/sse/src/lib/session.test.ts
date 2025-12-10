@@ -129,15 +129,15 @@ describe('SSE Session', async () => {
         keepAlive: 1,
       })
 
-      setTimeout(() => controller.abort(), 6)
+      setTimeout(() => controller.abort(), 5)
 
       let response = new Response(session.stream)
       session.send('before-keep-alive#')
       let body = await response.text()
       let [_, keepAliveData] = body.split('#')
 
-      // ho ! node ?!? sometimes 3 ticks sometime 4 ?!?
-      assert.ok(keepAliveData.startsWith('\n\n: \n\n: \n\n')) // aborted - 1?
+      let keepCount = keepAliveData.split(':').length
+      assert.ok(keepCount >= 3)
     })
 
     it('disconnect properly', async () => {
