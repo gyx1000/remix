@@ -4,3 +4,5 @@ Added `package.json` `exports`:
 
 - `remix/render-middleware` to re-export APIs from `@remix-run/render-middleware`
 - `remix/routes` to re-export APIs from `@remix-run/fetch-router/routes`
+- `remix/i18n` to re-export APIs from `@remix-run/i18n`
+- `remix/i18n/ui` to re-export APIs from `@remix-run/i18n/ui`
