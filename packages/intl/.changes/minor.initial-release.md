@@ -1,0 +1,1 @@
+Initial release of `@remix-run/intl`, a composable Intl package with locale negotiation, cached native Intl formatters, namespace-scoped translators, fallback resolution, tagged value interpolation, and lazy messages.

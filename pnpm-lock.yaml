@@ -136,24 +136,18 @@ importers:
         specifier: 'catalog:'
         version: 4.21.0
 
-  demos/i18n:
+  demos/intl:
     dependencies:
       remix:
         specifier: workspace:*
         version: link:../../packages/remix
     devDependencies:
-      '@types/dom-navigation':
-        specifier: 1.0.6
-        version: 1.0.6
       '@types/node':
         specifier: 'catalog:'
         version: 24.10.4
       '@typescript/native-preview':
         specifier: 'catalog:'
         version: 7.0.0-dev.20251125.1
-      esbuild:
-        specifier: ^0.25.10
-        version: 0.25.12
       tsx:
         specifier: 'catalog:'
         version: 4.21.0
@@ -1090,7 +1084,7 @@ importers:
         specifier: 'catalog:'
         version: 7.0.0-dev.20251125.1
 
-  packages/i18n:
+  packages/intl:
     dependencies:
       '@remix-run/fetch-router':
         specifier: workspace:^
@@ -1098,9 +1092,6 @@ importers:
       '@remix-run/headers':
         specifier: workspace:^
         version: link:../headers
-      '@remix-run/ui':
-        specifier: workspace:^
-        version: link:../ui
     devDependencies:
       '@remix-run/assert':
         specifier: workspace:*
@@ -1108,9 +1099,6 @@ importers:
       '@remix-run/test':
         specifier: workspace:*
         version: link:../test
-      '@types/dom-navigation':
-        specifier: 1.0.6
-        version: 1.0.6
       '@types/node':
         specifier: 'catalog:'
         version: 24.10.4
@@ -1444,9 +1432,9 @@ importers:
       '@remix-run/html-template':
         specifier: workspace:^
         version: link:../html-template
-      '@remix-run/i18n':
+      '@remix-run/intl':
         specifier: workspace:^
-        version: link:../i18n
+        version: link:../intl
       '@remix-run/lazy-file':
         specifier: workspace:^
         version: link:../lazy-file
