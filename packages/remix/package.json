@@ -61,8 +61,7 @@
     "./fs": "./src/fs.ts",
     "./headers": "./src/headers.ts",
     "./html-template": "./src/html-template.ts",
-    "./i18n": "./src/i18n.ts",
-    "./i18n/ui": "./src/i18n/ui.ts",
+    "./intl": "./src/intl.ts",
     "./lazy-file": "./src/lazy-file.ts",
     "./logger-middleware": "./src/logger-middleware.ts",
     "./method-override-middleware": "./src/method-override-middleware.ts",
@@ -293,13 +292,9 @@
         "types": "./dist/html-template.d.ts",
         "default": "./dist/html-template.js"
       },
-      "./i18n": {
-        "types": "./dist/i18n.d.ts",
-        "default": "./dist/i18n.js"
-      },
-      "./i18n/ui": {
-        "types": "./dist/i18n/ui.d.ts",
-        "default": "./dist/i18n/ui.js"
+      "./intl": {
+        "types": "./dist/intl.d.ts",
+        "default": "./dist/intl.js"
       },
       "./lazy-file": {
         "types": "./dist/lazy-file.d.ts",
@@ -621,7 +616,7 @@
     "@remix-run/terminal": "workspace:^",
     "@remix-run/node-serve": "workspace:^",
     "@remix-run/render-middleware": "workspace:^",
-    "@remix-run/i18n": "workspace:^"
+    "@remix-run/intl": "workspace:^"
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
