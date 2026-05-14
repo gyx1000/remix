@@ -33,10 +33,3 @@ export {
   number,
   relativeTime,
 } from './lib/intl.ts'
-export {
-  type LazyMessage,
-  gettextLazy,
-  ngettextLazy,
-  npgettextLazy,
-  pgettextLazy,
-} from './lib/lazy-message.ts'

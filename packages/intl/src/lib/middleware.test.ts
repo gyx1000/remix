@@ -29,7 +29,7 @@ describe('intl', () => {
     await middleware(context, async () => new Response())
 
     assert.equal(context.get(Locale), 'fr')
-    assert.equal(context.get(Translator)?.gettext('Save'), 'Enregistrer')
+    assert.equal(context.get(Translator)?.t('Save'), 'Enregistrer')
   })
 
   it('falls back to Accept-Language negotiation', async () => {

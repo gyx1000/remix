@@ -90,10 +90,10 @@ export default createController(routes, {
 
       return render(
         <Document
-          title={common.gettext('app.title')}
+          title={common.t('app.title')}
           locale={locale}
-          languageLabel={common.gettext('language.label')}
-          languageSubmit={common.gettext('language.submit')}
+          languageLabel={common.t('language.label')}
+          languageSubmit={common.t('language.submit')}
         >
           <section
             style={{
@@ -106,13 +106,13 @@ export default createController(routes, {
           >
             <div>
               <p style={{ margin: '0 0 10px', color: '#52616b', fontWeight: 700 }}>
-                {common.gettext('nav.home')}
+                {common.t('nav.home')}
               </p>
               <h1 style={{ margin: 0, fontSize: 44, lineHeight: 1.05 }}>
-                {home.gettext('hero.title')}
+                {home.t('hero.title')}
               </h1>
               <p style={{ maxWidth: 720, color: '#52616b', fontSize: 18, lineHeight: 1.55 }}>
-                {home.gettext('hero.copy')}
+                {home.t('hero.copy')}
               </p>
             </div>
 
@@ -124,9 +124,9 @@ export default createController(routes, {
                 padding: 16,
               }}
             >
-              <MetadataRow label={common.gettext('badge.locale')} value={localeNames[locale]} />
+              <MetadataRow label={common.t('badge.locale')} value={localeNames[locale]} />
               <MetadataRow
-                label={common.gettext('badge.fallbacks')}
+                label={common.t('badge.fallbacks')}
                 value={translator.fallbackChain.join(' -> ')}
               />
             </div>
@@ -140,30 +140,30 @@ export default createController(routes, {
               alignItems: 'stretch',
             }}
           >
-            <Panel title={common.gettext('section.ssr')}>
-              <p style={{ color: '#52616b', lineHeight: 1.5 }}>{home.gettext('ssr.copy')}</p>
+            <Panel title={common.t('section.ssr')}>
+              <p style={{ color: '#52616b', lineHeight: 1.5 }}>{home.t('ssr.copy')}</p>
               <dl style={{ display: 'grid', gridTemplateColumns: '120px 1fr', gap: 8 }}>
-                <dt style={{ color: '#52616b' }}>{common.gettext('button.save')}</dt>
-                <dd style={{ margin: 0, fontWeight: 700 }}>{common.gettext('button.save')}</dd>
+                <dt style={{ color: '#52616b' }}>{common.t('button.save')}</dt>
+                <dd style={{ margin: 0, fontWeight: 700 }}>{common.t('button.save')}</dd>
                 <dt style={{ color: '#52616b' }}>Checkout</dt>
-                <dd style={{ margin: 0, fontWeight: 700 }}>{home.gettext('checkout.label')}</dd>
+                <dd style={{ margin: 0, fontWeight: 700 }}>{home.t('checkout.label')}</dd>
               </dl>
             </Panel>
 
-            <Panel title={common.gettext('section.namespaces')}>
+            <Panel title={common.t('section.namespaces')}>
               <p style={{ color: '#52616b', lineHeight: 1.5 }}>
-                {home.gettext('namespaces.copy')}
+                {home.t('namespaces.copy')}
               </p>
               <dl style={{ display: 'grid', gridTemplateColumns: '120px 1fr', gap: 8 }}>
                 <dt style={{ color: '#52616b' }}>common</dt>
-                <dd style={{ margin: 0, fontWeight: 700 }}>{common.gettext('button.save')}</dd>
+                <dd style={{ margin: 0, fontWeight: 700 }}>{common.t('button.save')}</dd>
                 <dt style={{ color: '#52616b' }}>home</dt>
-                <dd style={{ margin: 0, fontWeight: 700 }}>{home.gettext('hero.title')}</dd>
+                <dd style={{ margin: 0, fontWeight: 700 }}>{home.t('hero.title')}</dd>
               </dl>
             </Panel>
 
-            <Panel title={common.gettext('section.intl')} wide>
-              <p style={{ color: '#52616b', lineHeight: 1.5 }}>{home.gettext('intl.copy')}</p>
+            <Panel title={common.t('section.intl')} wide>
+              <p style={{ color: '#52616b', lineHeight: 1.5 }}>{home.t('intl.copy')}</p>
               <div
                 style={{
                   display: 'grid',

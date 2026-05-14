@@ -1,12 +1,13 @@
 # intl
 
-Composable Intl primitives for Remix applications. `intl` provides request-scoped locale negotiation, a cached facade over JavaScript's native `Intl` formatters, namespace-based messages, plural handling, and lazy messages without a global locale.
+Composable Intl primitives for Remix applications. `intl` provides request-scoped locale negotiation, a cached facade over JavaScript's native `Intl` formatters, Rails-style `t()`/`translate()` message lookup, `l()`/`localize()` date-time localization, plural handling, and namespaces without a global locale.
 
 ## Features
 
 - Request-scoped `Locale` and `Translator` context keys for backend code
+- Rails-style `t()`/`translate()` message lookup with interpolation and plural messages
+- Rails-style `l()`/`localize()` date-time localization
 - Cached wrappers for `Intl.NumberFormat`, `Intl.DateTimeFormat`, `Intl.RelativeTimeFormat`, `Intl.ListFormat`, `Intl.DisplayNames`, `Intl.PluralRules`, `Intl.Collator`, and `Intl.Segmenter`
-- Rails/gettext-style message lookup with interpolation and plural messages
 - Tagged interpolation values like `number()`, `dateTime()`, `relativeTime()`, `list()`, and `displayName()`
 - Locale fallback chains such as `fr-CH -> fr -> en`
 - Namespace-scoped translators for route and feature catalogs
@@ -65,7 +66,7 @@ router.get('/checkout', (context) => {
   let t = context.get(Translator)
 
   return new Response(
-    t.gettext('total', {
+    t.t('total', {
       values: { amount: number(1234.5, { style: 'currency', currency: 'CHF' }) },
     }),
   )
@@ -101,7 +102,7 @@ Namespaces split translations into page- or feature-sized catalogs:
 router.get('/checkout', (context) => {
   let t = context.get(Translator).namespace('checkout')
 
-  return new Response(t.gettext('Pay now'))
+  return new Response(t.t('Pay now'))
 })
 ```
 
@@ -130,19 +131,15 @@ intl({
 })
 ```
 
-## Lazy Messages
+## Localizing dates
 
-Lazy messages let modules declare translatable text before a request locale exists:
+Use `l()` or `localize()` for Rails-style date-time localization:
 
 ```ts
-import { gettextLazy } from 'remix/intl'
-
-let title = gettextLazy('Dashboard')
-
-router.get('/dashboard', (context) => {
+router.get('/today', (context) => {
   let t = context.get(Translator)
 
-  return new Response(t.resolve(title))
+  return new Response(t.l(new Date(), { dateStyle: 'long' }))
 })
 ```
 
@@ -157,9 +154,9 @@ Prefer a full document reload when the user changes language. Let the server upd
 
 ## Related Work
 
+- [Rails Internationalization API](https://guides.rubyonrails.org/i18n.html)
 - [ECMAScript Intl](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl)
 - [Unicode MessageFormat 2.0](https://github.com/unicode-org/message-format-wg)
-- [GNU gettext](https://www.gnu.org/software/gettext/)
 
 ## License
 
