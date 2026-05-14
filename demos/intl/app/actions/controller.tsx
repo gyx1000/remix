@@ -18,7 +18,7 @@ export default createController(routes, {
       let common = translator.namespace('common')
       let home = translator.namespace('home')
       let intl = translator.intl
-      let intlExamples = getIntlExamples({ intl, locale })
+      let intlExamples = getIntlExamples({ intl, locale, messages: home })
 
       return render(
         <Document

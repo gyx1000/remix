@@ -1,4 +1,4 @@
-import type { RemixIntl } from 'remix/intl'
+import type { NamespaceTranslator, RemixIntl } from 'remix/intl'
 
 export interface IntlExample {
   name: string
@@ -9,9 +9,11 @@ export interface IntlExample {
 export function getIntlExamples({
   intl,
   locale,
+  messages,
 }: {
   intl: RemixIntl
   locale: string
+  messages: NamespaceTranslator
 }): IntlExample[] {
   let collator = intl.collator()
 
@@ -19,7 +21,7 @@ export function getIntlExamples({
     {
       name: 'Intl.NumberFormat',
       value: intl.formatNumber(1234.5, { style: 'currency', currency: 'CHF' }),
-      description: 'Currency and number formatting',
+      description: messages.t('intl.numberFormat.description'),
     },
     {
       name: 'Intl.DateTimeFormat',
@@ -28,32 +30,32 @@ export function getIntlExamples({
         dateStyle: 'medium',
         timeStyle: 'short',
       }),
-      description: 'Date, time, calendar, and timezone formatting',
+      description: messages.t('intl.dateTimeFormat.description'),
     },
     {
       name: 'Intl.RelativeTimeFormat',
       value: intl.formatRelativeTime(-1, 'day', { numeric: 'auto' }),
-      description: 'Human relative time',
+      description: messages.t('intl.relativeTimeFormat.description'),
     },
     {
       name: 'Intl.ListFormat',
       value: intl.formatList(['Remix', 'React', 'Vite']),
-      description: 'Localized list separators',
+      description: messages.t('intl.listFormat.description'),
     },
     {
       name: 'Intl.DisplayNames',
       value: intl.formatDisplayName('CH', { type: 'region' }),
-      description: 'Localized names for regions, languages, scripts, and more',
+      description: messages.t('intl.displayNames.description'),
     },
     {
       name: 'Intl.PluralRules',
       value: `2 → ${intl.selectPlural(2)}`,
-      description: 'Locale-specific plural categories',
+      description: messages.t('intl.pluralRules.description'),
     },
     {
       name: 'Intl.Collator',
       value: ['zebra', 'éclair', 'avion'].sort(collator.compare).join(', '),
-      description: 'Language-sensitive string sorting and comparison',
+      description: messages.t('intl.collator.description'),
     },
     {
       name: 'Intl.Segmenter',
@@ -61,27 +63,27 @@ export function getIntlExamples({
         .filter((segment) => segment.isWordLike)
         .map((segment) => segment.segment)
         .join(' · '),
-      description: 'Locale-aware text segmentation',
+      description: messages.t('intl.segmenter.description'),
     },
     {
       name: 'Intl.Locale',
       value: `${intl.localeObject.language}${intl.localeObject.region ? `-${intl.localeObject.region}` : ''}`,
-      description: 'Locale parsing and normalization',
+      description: messages.t('intl.locale.description'),
     },
     {
       name: 'Intl.DurationFormat',
       value: formatDuration(locale),
-      description: 'Localized structured durations when supported by the runtime',
+      description: messages.t('intl.durationFormat.description'),
     },
     {
       name: 'Intl.getCanonicalLocales',
       value: Intl.getCanonicalLocales(['FR-ch', 'en-us']).join(', '),
-      description: 'Locale tag canonicalization',
+      description: messages.t('intl.getCanonicalLocales.description'),
     },
     {
       name: 'Intl.supportedValuesOf',
       value: supportedValuesSample('calendar'),
-      description: 'Runtime-supported calendars, currencies, units, timezones, and more',
+      description: messages.t('intl.supportedValuesOf.description'),
     },
   ]
 }

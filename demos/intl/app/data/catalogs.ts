@@ -26,6 +26,20 @@ export const catalogs = {
         'Route code can use small namespace-scoped translators while all translation lookup stays on the server.',
       'intl.copy':
         'The request-scoped translator also exposes cached native Intl primitives for formatting, sorting, segmenting, and inspecting locale data.',
+      'intl.numberFormat.description': 'Currency and number formatting',
+      'intl.dateTimeFormat.description': 'Date, time, calendar, and timezone formatting',
+      'intl.relativeTimeFormat.description': 'Human relative time',
+      'intl.listFormat.description': 'Localized list separators',
+      'intl.displayNames.description': 'Localized names for regions, languages, scripts, and more',
+      'intl.pluralRules.description': 'Locale-specific plural categories',
+      'intl.collator.description': 'Language-sensitive string sorting and comparison',
+      'intl.segmenter.description': 'Locale-aware text segmentation',
+      'intl.locale.description': 'Locale parsing and normalization',
+      'intl.durationFormat.description':
+        'Localized structured durations when supported by the runtime',
+      'intl.getCanonicalLocales.description': 'Locale tag canonicalization',
+      'intl.supportedValuesOf.description':
+        'Runtime-supported calendars, currencies, units, timezones, and more',
     },
   },
   fr: {
@@ -53,6 +67,22 @@ export const catalogs = {
         'Le code des routes peut utiliser de petits traducteurs par namespace pendant que toute la traduction reste côté serveur.',
       'intl.copy':
         'Le traducteur de la requête expose aussi des primitives Intl natives mises en cache pour formater, trier, segmenter et inspecter les données de locale.',
+      'intl.numberFormat.description': 'Formatage des devises et des nombres',
+      'intl.dateTimeFormat.description':
+        'Formatage des dates, heures, calendriers et fuseaux horaires',
+      'intl.relativeTimeFormat.description': 'Temps relatif lisible',
+      'intl.listFormat.description': 'Séparateurs de listes localisés',
+      'intl.displayNames.description':
+        'Noms localisés pour les régions, langues, écritures et plus encore',
+      'intl.pluralRules.description': 'Catégories de pluriel propres à la locale',
+      'intl.collator.description': 'Tri et comparaison de chaînes sensibles à la langue',
+      'intl.segmenter.description': 'Segmentation de texte adaptée à la locale',
+      'intl.locale.description': 'Analyse et normalisation des tags de locale',
+      'intl.durationFormat.description':
+        'Durées structurées localisées lorsque le runtime les prend en charge',
+      'intl.getCanonicalLocales.description': 'Canonicalisation des tags de locale',
+      'intl.supportedValuesOf.description':
+        'Calendriers, devises, unités, fuseaux horaires et autres valeurs pris en charge par le runtime',
     },
   },
   'fr-CH': {
