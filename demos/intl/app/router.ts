@@ -8,12 +8,9 @@ import { catalogs } from './data/catalogs.ts'
 import { render } from './middleware/render.ts'
 import { routes } from './routes.ts'
 
-const supportedLocales = ['en', 'fr', 'fr-CH'] as const
-const defaultLocale = 'en'
-
 const intlMiddleware = intl({
-  supportedLocales,
-  defaultLocale,
+  supportedLocales: ['en', 'fr', 'fr-CH'] as const,
+  defaultLocale: 'en',
   catalogs,
   getLocale(context) {
     let url = new URL(context.request.url)
