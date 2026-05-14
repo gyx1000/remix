@@ -35,6 +35,7 @@ export const catalogs = {
       'intl.pluralRules.description': 'Locale-specific plural categories',
       'pluralMessages.description': 'The translator selects the right message by count.',
       'pluralMessages.value': {
+        zero: 'No unread messages',
         one: '%{count} unread message',
         other: '%{count} unread messages',
       },
@@ -84,6 +85,7 @@ export const catalogs = {
       'intl.pluralRules.description': 'Catégories de pluriel propres à la locale',
       'pluralMessages.description': 'Le traducteur choisit le bon message selon le nombre.',
       'pluralMessages.value': {
+        zero: 'Aucun message non lu',
         one: '%{count} message non lu',
         other: '%{count} messages non lus',
       },
@@ -105,6 +107,7 @@ export const catalogs = {
       'checkout.label': 'Commande',
       'pluralMessages.description': 'Le traducteur choisit le bon message selon le nombre.',
       'pluralMessages.value': {
+        zero: 'Aucun message non lu',
         one: '%{count} message non lu',
         other: '%{count} messages non lus',
       },
@@ -146,6 +149,7 @@ export const catalogs = {
       'pluralMessages.description':
         'Il traduttore sceglie il messaggio corretto in base al conteggio.',
       'pluralMessages.value': {
+        zero: 'Nessun messaggio non letto',
         one: '%{count} messaggio non letto',
         other: '%{count} messaggi non letti',
       },
@@ -195,6 +199,7 @@ export const catalogs = {
       'pluralMessages.description':
         'Der Übersetzer wählt anhand der Anzahl die passende Nachricht.',
       'pluralMessages.value': {
+        zero: 'Keine ungelesenen Nachrichten',
         one: '%{count} ungelesene Nachricht',
         other: '%{count} ungelesene Nachrichten',
       },

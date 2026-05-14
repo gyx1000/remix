@@ -136,7 +136,10 @@ class DefaultTranslator implements Translator {
       text = message
     } else if (message !== undefined) {
       let category = this.intl.selectPlural(options.count ?? 0)
-      text = message[category] ?? message.other
+      text =
+        options.count === 0
+          ? (message.zero ?? message[category] ?? message.other)
+          : (message[category] ?? message.other)
     }
 
     return interpolate(this.intl, text, options)

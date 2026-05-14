@@ -93,7 +93,7 @@ export default createController(routes, {
             <PluralMessagesCard
               title={common.t('section.pluralMessages')}
               description={home.t('pluralMessages.description')}
-              values={[1, 5].map((count) => home.t('pluralMessages.value', { count }))}
+              values={[0, 1, 5].map((count) => home.t('pluralMessages.value', { count }))}
             />
 
             <Panel title={common.t('section.intl')} wide>

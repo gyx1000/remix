@@ -82,6 +82,28 @@ describe('createTranslator', () => {
     assert.equal(translator.t('cart.items', { count: 3 }), '3 articles')
   })
 
+  it('prefers explicit zero messages when count is zero', () => {
+    let translator = createTranslator({
+      locale: 'en',
+      defaultLocale: 'en',
+      catalogs: {
+        en: {
+          common: {
+            'inbox.unread': {
+              zero: 'No unread messages',
+              one: '%{count} unread message',
+              other: '%{count} unread messages',
+            },
+          },
+        },
+      },
+    })
+
+    assert.equal(translator.t('inbox.unread', { count: 0 }), 'No unread messages')
+    assert.equal(translator.t('inbox.unread', { count: 1 }), '1 unread message')
+    assert.equal(translator.t('inbox.unread', { count: 5 }), '5 unread messages')
+  })
+
   it('falls back to the key or default value for missing messages', () => {
     let translator = createTranslator({
       locale: 'en',
