@@ -9,7 +9,7 @@ import { render } from './middleware/render.ts'
 import { routes } from './routes.ts'
 
 const intlMiddleware = intl({
-  supportedLocales: ['en', 'fr', 'fr-CH', 'it-CH', 'de-CH'] as const,
+  supportedLocales: ['en', 'fr-CH', 'it-CH', 'de-CH'] as const,
   defaultLocale: 'en',
   catalogs,
   getLocale(context) {
@@ -17,7 +17,10 @@ const intlMiddleware = intl({
     return url.searchParams.get('locale')
   },
   fallbackLocales(locale) {
-    return locale === 'fr-CH' ? ['fr'] : []
+    if (locale === 'fr-CH') return ['fr']
+    if (locale === 'it-CH') return ['it']
+    if (locale === 'de-CH') return ['de']
+    return []
   },
 })
 

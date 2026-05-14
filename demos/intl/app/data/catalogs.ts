@@ -113,7 +113,7 @@ export const catalogs = {
       },
     },
   },
-  'it-CH': {
+  it: {
     common: {
       'app.title': 'Remix Intl',
       'app.subtitle': 'Un traduttore per richiesta per SSR, idratazione e Frames.',
@@ -163,7 +163,7 @@ export const catalogs = {
         'Calendari, valute, unità, fusi orari e altri valori supportati dal runtime',
     },
   },
-  'de-CH': {
+  de: {
     common: {
       'app.title': 'Remix Intl',
       'app.subtitle': 'Ein Übersetzer pro Request für SSR, Hydration und Frames.',
