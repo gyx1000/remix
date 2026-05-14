@@ -2,6 +2,7 @@ import type { Handle, RemixNode } from 'remix/ui'
 
 type PanelProps = {
   title: string
+  wide?: boolean
   children?: RemixNode
 }
 
@@ -14,6 +15,7 @@ export function Panel(handle: Handle<PanelProps>) {
         background: '#fff',
         padding: 18,
         minHeight: 160,
+        gridColumn: handle.props.wide ? '1 / -1' : undefined,
       }}
     >
       <h2 style={{ margin: '0 0 12px', fontSize: 18 }}>{handle.props.title}</h2>
