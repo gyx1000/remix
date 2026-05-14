@@ -8,9 +8,9 @@ export {
 } from './lib/middleware.ts'
 export {
   type IntlCatalogs,
+  type IntlMessageCatalog,
   type IntlMessage,
   type IntlMessageOptions,
-  type IntlNamespaceCatalog,
   type IntlPluralMessages,
   type IntlTranslatorOptions,
   type NamespaceTranslator,

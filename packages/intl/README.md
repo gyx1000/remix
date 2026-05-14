@@ -1,6 +1,6 @@
 # intl
 
-Composable Intl primitives for Remix applications. `intl` provides request-scoped locale negotiation, a cached facade over JavaScript's native `Intl` formatters, Rails-style `t()`/`translate()` message lookup, `l()`/`localize()` date-time localization, plural handling, and namespaces without a global locale.
+Composable Intl primitives for Remix applications. `intl` provides request-scoped locale negotiation, a cached facade over JavaScript's native `Intl` formatters, Rails-style `t()`/`translate()` message lookup, `l()`/`localize()` date-time localization, plural handling, and scoped keys without a global locale.
 
 ## Features
 
@@ -10,7 +10,7 @@ Composable Intl primitives for Remix applications. `intl` provides request-scope
 - Cached wrappers for `Intl.NumberFormat`, `Intl.DateTimeFormat`, `Intl.RelativeTimeFormat`, `Intl.ListFormat`, `Intl.DisplayNames`, `Intl.PluralRules`, `Intl.Collator`, and `Intl.Segmenter`
 - Tagged interpolation values like `number()`, `dateTime()`, `relativeTime()`, `list()`, and `displayName()`
 - Locale fallback chains such as `fr-CH -> fr -> en`
-- Namespace-scoped translators for route and feature catalogs
+- Scoped translation lookup for route and feature keys
 
 ## Installation
 
@@ -27,29 +27,33 @@ import { intl, number, Translator } from 'remix/intl'
 
 let catalogs = {
   en: {
-    common: {
-      Save: 'Save',
+    button: {
+      save: 'Save',
+    },
+    checkout: {
       total: 'Total: %{amount}',
-      'cart.items': {
+      pay_now: 'Pay now',
+    },
+    cart: {
+      items: {
         one: '%{count} item',
         other: '%{count} items',
       },
     },
-    checkout: {
-      'Pay now': 'Pay now',
-    },
   },
   fr: {
-    common: {
-      Save: 'Enregistrer',
+    button: {
+      save: 'Enregistrer',
+    },
+    checkout: {
       total: 'Total : %{amount}',
-      'cart.items': {
+      pay_now: 'Payer maintenant',
+    },
+    cart: {
+      items: {
         one: '%{count} article',
         other: '%{count} articles',
       },
-    },
-    checkout: {
-      'Pay now': 'Payer maintenant',
     },
   },
 }
@@ -66,10 +70,20 @@ router.get('/checkout', (context) => {
   let t = context.get(Translator)
 
   return new Response(
-    t.t('total', {
+    t.t('checkout.total', {
       values: { amount: number(1234.5, { style: 'currency', currency: 'CHF' }) },
     }),
   )
+})
+```
+
+Use `scope` when route code already provides useful context:
+
+```ts
+router.get('/checkout', (context) => {
+  let t = context.get(Translator)
+
+  return new Response(t.t('pay_now', { scope: 'checkout' }))
 })
 ```
 
@@ -94,19 +108,19 @@ intl.segment('Hello world', { granularity: 'word' })
 
 `Translator` exposes the same facade as `translator.intl`, scoped to the resolved fallback chain for the request.
 
-## Namespaces
+## Scoped Translators
 
-Namespaces split translations into page- or feature-sized catalogs:
+Prefer direct hierarchical keys or `scope`. For compatibility, `namespace()` creates a small translator that prefixes keys with a scope:
 
 ```ts
 router.get('/checkout', (context) => {
   let t = context.get(Translator).namespace('checkout')
 
-  return new Response(t.t('Pay now'))
+  return new Response(t.t('pay_now'))
 })
 ```
 
-A `fr-CH` request can resolve messages from `fr-CH`, `fr`, and `en` while route code keeps using the same namespace translator.
+A `fr-CH` request can resolve messages from `fr-CH`, `fr`, and `en` while route code keeps using the same scoped key.
 
 ## Locale Fallbacks
 

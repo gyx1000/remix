@@ -1,4 +1,4 @@
-import type { NamespaceTranslator, RemixIntl } from 'remix/intl'
+import type { RemixIntl, TranslatorValue } from 'remix/intl'
 
 export interface IntlExample {
   name: string
@@ -9,11 +9,11 @@ export interface IntlExample {
 export function getIntlExamples({
   intl,
   locale,
-  messages,
+  translator,
 }: {
   intl: RemixIntl
   locale: string
-  messages: NamespaceTranslator
+  translator: TranslatorValue
 }): IntlExample[] {
   let collator = intl.collator()
 
@@ -21,7 +21,7 @@ export function getIntlExamples({
     {
       name: 'Intl.NumberFormat',
       value: intl.formatNumber(1234.5, { style: 'currency', currency: 'CHF' }),
-      description: messages.t('intl.numberFormat.description'),
+      description: translator.t('numberFormat.description', { scope: 'home.intl' }),
     },
     {
       name: 'Intl.DateTimeFormat',
@@ -30,32 +30,32 @@ export function getIntlExamples({
         dateStyle: 'medium',
         timeStyle: 'short',
       }),
-      description: messages.t('intl.dateTimeFormat.description'),
+      description: translator.t('dateTimeFormat.description', { scope: 'home.intl' }),
     },
     {
       name: 'Intl.RelativeTimeFormat',
       value: intl.formatRelativeTime(-1, 'day', { numeric: 'auto' }),
-      description: messages.t('intl.relativeTimeFormat.description'),
+      description: translator.t('relativeTimeFormat.description', { scope: 'home.intl' }),
     },
     {
       name: 'Intl.ListFormat',
       value: intl.formatList(['Remix', 'React', 'Vite']),
-      description: messages.t('intl.listFormat.description'),
+      description: translator.t('listFormat.description', { scope: 'home.intl' }),
     },
     {
       name: 'Intl.DisplayNames',
       value: intl.formatDisplayName('CH', { type: 'region' }),
-      description: messages.t('intl.displayNames.description'),
+      description: translator.t('displayNames.description', { scope: 'home.intl' }),
     },
     {
       name: 'Intl.PluralRules',
       value: `2 → ${intl.selectPlural(2)}`,
-      description: messages.t('intl.pluralRules.description'),
+      description: translator.t('pluralRules.description', { scope: 'home.intl' }),
     },
     {
       name: 'Intl.Collator',
       value: ['zebra', 'éclair', 'avion'].sort(collator.compare).join(', '),
-      description: messages.t('intl.collator.description'),
+      description: translator.t('collator.description', { scope: 'home.intl' }),
     },
     {
       name: 'Intl.Segmenter',
@@ -63,27 +63,27 @@ export function getIntlExamples({
         .filter((segment) => segment.isWordLike)
         .map((segment) => segment.segment)
         .join(' · '),
-      description: messages.t('intl.segmenter.description'),
+      description: translator.t('segmenter.description', { scope: 'home.intl' }),
     },
     {
       name: 'Intl.Locale',
       value: `${intl.localeObject.language}${intl.localeObject.region ? `-${intl.localeObject.region}` : ''}`,
-      description: messages.t('intl.locale.description'),
+      description: translator.t('locale.description', { scope: 'home.intl' }),
     },
     {
       name: 'Intl.DurationFormat',
       value: formatDuration(locale),
-      description: messages.t('intl.durationFormat.description'),
+      description: translator.t('durationFormat.description', { scope: 'home.intl' }),
     },
     {
       name: 'Intl.getCanonicalLocales',
       value: Intl.getCanonicalLocales(['FR-ch', 'en-us']).join(', '),
-      description: messages.t('intl.getCanonicalLocales.description'),
+      description: translator.t('getCanonicalLocales.description', { scope: 'home.intl' }),
     },
     {
       name: 'Intl.supportedValuesOf',
       value: supportedValuesSample('calendar'),
-      description: messages.t('intl.supportedValuesOf.description'),
+      description: translator.t('supportedValuesOf.description', { scope: 'home.intl' }),
     },
   ]
 }

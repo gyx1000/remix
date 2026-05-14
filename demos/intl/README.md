@@ -5,7 +5,7 @@ This demo shows how `remix/intl` works for full-document SSR.
 ## What It Demonstrates
 
 - Request-scoped locale negotiation with `intl()` middleware
-- Rails-style translation keys with namespace-scoped translators
+- Rails-style hierarchical translation keys and scoped lookup options
 - Server-precomputed fallback resolution such as `fr-CH -> fr -> en`
 - Full document reload for language changes
 

@@ -22,7 +22,6 @@ export interface IntlMiddlewareOptions {
   supportedLocales: readonly string[]
   defaultLocale: string
   catalogs: IntlCatalogs
-  defaultNamespace?: string
   getLocale?: IntlLocaleResolver
   fallbackLocales?: readonly string[] | IntlFallbackLocaleResolver
 }
@@ -40,7 +39,6 @@ export function intl(
       locale,
       defaultLocale: options.defaultLocale,
       catalogs: options.catalogs,
-      defaultNamespace: options.defaultNamespace,
       fallbackLocales,
     })
 

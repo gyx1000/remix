@@ -1,1 +1,1 @@
-Initial release of `@remix-run/intl`, a composable Intl package with locale negotiation, cached native Intl formatters, Rails-style translators, explicit zero-count plural messages, date-time localization, fallback resolution, tagged value interpolation, and namespaces.
+Initial release of `@remix-run/intl`, a composable Intl package with locale negotiation, cached native Intl formatters, Rails-style translators, scoped hierarchical keys, explicit zero-count plural messages, date-time localization, fallback resolution, and tagged value interpolation.

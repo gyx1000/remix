@@ -16,8 +16,8 @@ describe('intl', () => {
       defaultLocale: 'en',
       catalogs: {
         fr: {
-          common: {
-            Save: 'Enregistrer',
+          button: {
+            save: 'Enregistrer',
           },
         },
       },
@@ -29,7 +29,7 @@ describe('intl', () => {
     await middleware(context, async () => new Response())
 
     assert.equal(context.get(Locale), 'fr')
-    assert.equal(context.get(Translator)?.t('Save'), 'Enregistrer')
+    assert.equal(context.get(Translator)?.t('button.save'), 'Enregistrer')
   })
 
   it('falls back to Accept-Language negotiation', async () => {

@@ -18,13 +18,16 @@ export interface IntlPluralMessages {
 
 export type IntlMessage = string | IntlPluralMessages
 
-export type IntlNamespaceCatalog = Record<string, IntlMessage | undefined>
+export interface IntlMessageCatalog {
+  [key: string]: IntlMessage | IntlMessageCatalog | undefined
+}
 
-export type IntlLocaleCatalog = Record<string, IntlNamespaceCatalog | undefined>
+export type IntlLocaleCatalog = IntlMessageCatalog
 
 export type IntlCatalogs = Record<string, IntlLocaleCatalog | undefined>
 
 export interface IntlMessageOptions {
+  scope?: string | readonly string[]
   namespace?: string
   count?: number
   values?: Record<string, IntlFormatValue | unknown>
@@ -36,7 +39,6 @@ export interface IntlTranslatorOptions {
   defaultLocale: string
   catalogs: IntlCatalogs
   fallbackLocales?: readonly string[] | ((locale: string) => readonly string[])
-  defaultNamespace?: string
   intl?: RemixIntl
 }
 
@@ -50,7 +52,6 @@ export interface NamespaceTranslator {
 export interface Translator {
   readonly locale: string
   readonly defaultLocale: string
-  readonly defaultNamespace: string
   readonly fallbackChain: readonly string[]
   readonly intl: RemixIntl
   t(key: string, options?: IntlMessageOptions): string
@@ -59,8 +60,6 @@ export interface Translator {
   localize(value: IntlDateTimeValue, options?: Intl.DateTimeFormatOptions): string
   namespace(namespace: string): NamespaceTranslator
 }
-
-const defaultNamespace = 'common'
 
 export function createLocaleFallbacks(locale: string, defaultLocale: string): string[] {
   let locales: string[] = []
@@ -84,7 +83,6 @@ export function createTranslator(options: IntlTranslatorOptions): Translator {
 class DefaultTranslator implements Translator {
   readonly locale: string
   readonly defaultLocale: string
-  readonly defaultNamespace: string
   readonly fallbackChain: readonly string[]
   readonly intl: RemixIntl
 
@@ -93,15 +91,13 @@ class DefaultTranslator implements Translator {
   constructor(options: IntlTranslatorOptions) {
     this.locale = options.locale
     this.defaultLocale = options.defaultLocale
-    this.defaultNamespace = options.defaultNamespace ?? defaultNamespace
     this.#catalogs = options.catalogs
     this.fallbackChain = resolveFallbackChain(options)
     this.intl = options.intl ?? createIntl(this.fallbackChain)
   }
 
   t(key: string, options: IntlMessageOptions = {}): string {
-    let namespace = options.namespace ?? this.defaultNamespace
-    let message = this.#findMessage(namespace, key)
+    let message = this.#findMessage(resolveScopedKey(key, options))
     let fallback = options.defaultValue ?? key
     return this.#format(message, fallback, options)
   }
@@ -122,9 +118,9 @@ class DefaultTranslator implements Translator {
     return new DefaultNamespaceTranslator(this, namespace)
   }
 
-  #findMessage(namespace: string, key: string): IntlMessage | undefined {
+  #findMessage(key: string): IntlMessage | undefined {
     for (let locale of this.fallbackChain) {
-      let message = this.#catalogs[locale]?.[namespace]?.[key]
+      let message = findCatalogMessage(this.#catalogs[locale], key)
       if (message !== undefined) return message
     }
   }
@@ -159,7 +155,7 @@ class DefaultNamespaceTranslator implements NamespaceTranslator {
   }
 
   t(key: string, options?: Omit<IntlMessageOptions, 'namespace'>): string {
-    return this.#translator.t(key, { ...options, namespace: this.namespaceName })
+    return this.#translator.t(key, { ...options, scope: this.namespaceName })
   }
 
   translate(key: string, options?: Omit<IntlMessageOptions, 'namespace'>): string {
@@ -190,6 +186,52 @@ function resolveFallbackChain(options: IntlTranslatorOptions): readonly string[]
 
 function appendUnique(values: string[], value: string): void {
   if (!values.includes(value)) values.push(value)
+}
+
+function resolveScopedKey(key: string, options: IntlMessageOptions): string {
+  let scope = options.scope ?? options.namespace
+  if (scope === undefined) return key
+
+  let scopes = typeof scope === 'string' ? [scope] : scope
+  return [...scopes, key].filter((part) => part !== '').join('.')
+}
+
+function findCatalogMessage(
+  catalog: IntlLocaleCatalog | undefined,
+  key: string,
+): IntlMessage | undefined {
+  if (catalog === undefined) return undefined
+
+  let current: IntlMessageCatalog | IntlMessage | undefined = catalog
+  let segments = key.split('.')
+
+  for (let index = 0; index < segments.length; index++) {
+    if (!isMessageCatalog(current)) return undefined
+
+    let remainingKey = segments.slice(index).join('.')
+    let direct = current[remainingKey]
+    if (isIntlMessage(direct)) return direct
+
+    current = current[segments[index]]
+  }
+
+  return isIntlMessage(current) ? current : undefined
+}
+
+function isIntlMessage(value: IntlMessage | IntlMessageCatalog | undefined): value is IntlMessage {
+  return typeof value === 'string' || isIntlPluralMessages(value)
+}
+
+function isIntlPluralMessages(
+  value: IntlMessage | IntlMessageCatalog | undefined,
+): value is IntlPluralMessages {
+  return isMessageCatalog(value) && typeof value.other === 'string'
+}
+
+function isMessageCatalog(
+  value: IntlMessage | IntlMessageCatalog | undefined,
+): value is IntlMessageCatalog {
+  return typeof value === 'object' && value !== null
 }
 
 function interpolate(intl: RemixIntl, message: string, options: IntlMessageOptions): string {

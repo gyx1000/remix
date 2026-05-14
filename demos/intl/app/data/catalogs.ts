@@ -2,19 +2,20 @@ import type { IntlCatalogs } from 'remix/intl'
 
 export const catalogs = {
   en: {
-    common: {
-      'app.title': 'Remix Intl',
-      'app.subtitle': 'One request-scoped translator across SSR, hydration, and Frames.',
-      'language.label': 'Language',
-      'language.submit': 'Reload document',
-      'nav.home': 'Overview',
-      'section.ssr': 'Full SSR',
-      'section.namespaces': 'Namespaces',
-      'section.pluralMessages': 'Plural messages',
-      'section.intl': 'Native Intl examples',
-      'badge.locale': 'Active locale',
-      'badge.fallbacks': 'Fallback chain',
-      'button.save': 'Save',
+    'app.title': 'Remix Intl',
+    'app.subtitle': 'One request-scoped translator across SSR, hydration, and Frames.',
+    'language.label': 'Language',
+    'language.submit': 'Reload document',
+    'nav.home': 'Overview',
+    'section.ssr': 'Full SSR',
+    'section.scopes': 'Scopes',
+    'section.pluralMessages': 'Plural messages',
+    'section.intl': 'Native Intl examples',
+    'badge.locale': 'Active locale',
+    'badge.fallbacks': 'Fallback chain',
+    'button.save': 'Save',
+    checkout: {
+      pay_now: 'Pay now',
     },
     home: {
       'hero.title': 'Internationalization without global state',
@@ -23,8 +24,8 @@ export const catalogs = {
       'ssr.copy':
         'This card is rendered entirely on the server. Switch to Swiss French to see "Checkout" come from fr-CH while "Save" falls back to fr.',
       'checkout.label': 'Checkout',
-      'namespaces.copy':
-        'Route code can use small namespace-scoped translators while all translation lookup stays on the server.',
+      'scopes.copy':
+        'Route code can use direct hierarchical keys or a Rails-style scope option while all translation lookup stays on the server.',
       'intl.copy':
         'The request-scoped translator also exposes cached native Intl primitives for formatting, sorting, segmenting, and inspecting locale data.',
       'intl.numberFormat.description': 'Currency and number formatting',
@@ -50,19 +51,20 @@ export const catalogs = {
     },
   },
   fr: {
-    common: {
-      'app.title': 'Remix Intl',
-      'app.subtitle': 'Un traducteur par requête pour le SSR, l’hydratation et les Frames.',
-      'language.label': 'Langue',
-      'language.submit': 'Recharger le document',
-      'nav.home': 'Vue d’ensemble',
-      'section.ssr': 'SSR complet',
-      'section.namespaces': 'Namespaces',
-      'section.pluralMessages': 'Messages pluriels',
-      'section.intl': 'Exemples Intl natifs',
-      'badge.locale': 'Locale active',
-      'badge.fallbacks': 'Chaîne de fallback',
-      'button.save': 'Enregistrer',
+    'app.title': 'Remix Intl',
+    'app.subtitle': 'Un traducteur par requête pour le SSR, l’hydratation et les Frames.',
+    'language.label': 'Langue',
+    'language.submit': 'Recharger le document',
+    'nav.home': 'Vue d’ensemble',
+    'section.ssr': 'SSR complet',
+    'section.scopes': 'Scopes',
+    'section.pluralMessages': 'Messages pluriels',
+    'section.intl': 'Exemples Intl natifs',
+    'badge.locale': 'Locale active',
+    'badge.fallbacks': 'Chaîne de fallback',
+    'button.save': 'Enregistrer',
+    checkout: {
+      pay_now: 'Payer maintenant',
     },
     home: {
       'hero.title': 'Internationalisation sans état global',
@@ -71,8 +73,8 @@ export const catalogs = {
       'ssr.copy':
         'Cette carte est entièrement rendue côté serveur. Passez en français suisse pour voir "Checkout" venir de fr-CH pendant que "Save" retombe sur fr.',
       'checkout.label': 'Paiement',
-      'namespaces.copy':
-        'Le code des routes peut utiliser de petits traducteurs par namespace pendant que toute la traduction reste côté serveur.',
+      'scopes.copy':
+        'Le code des routes peut utiliser des clés hiérarchiques directes ou une option scope façon Rails pendant que toute la traduction reste côté serveur.',
       'intl.copy':
         'Le traducteur de la requête expose aussi des primitives Intl natives mises en cache pour formater, trier, segmenter et inspecter les données de locale.',
       'intl.numberFormat.description': 'Formatage des devises et des nombres',
@@ -100,8 +102,9 @@ export const catalogs = {
     },
   },
   'fr-CH': {
-    common: {
-      'language.submit': 'Recharger la page',
+    'language.submit': 'Recharger la page',
+    checkout: {
+      pay_now: 'Payer maintenant',
     },
     home: {
       'checkout.label': 'Commande',
@@ -114,19 +117,20 @@ export const catalogs = {
     },
   },
   it: {
-    common: {
-      'app.title': 'Remix Intl',
-      'app.subtitle': 'Un traduttore per richiesta per SSR, idratazione e Frames.',
-      'language.label': 'Lingua',
-      'language.submit': 'Ricarica il documento',
-      'nav.home': 'Panoramica',
-      'section.ssr': 'SSR completo',
-      'section.namespaces': 'Namespace',
-      'section.pluralMessages': 'Messaggi plurali',
-      'section.intl': 'Esempi Intl nativi',
-      'badge.locale': 'Locale attiva',
-      'badge.fallbacks': 'Catena di fallback',
-      'button.save': 'Salva',
+    'app.title': 'Remix Intl',
+    'app.subtitle': 'Un traduttore per richiesta per SSR, idratazione e Frames.',
+    'language.label': 'Lingua',
+    'language.submit': 'Ricarica il documento',
+    'nav.home': 'Panoramica',
+    'section.ssr': 'SSR completo',
+    'section.scopes': 'Scope',
+    'section.pluralMessages': 'Messaggi plurali',
+    'section.intl': 'Esempi Intl nativi',
+    'badge.locale': 'Locale attiva',
+    'badge.fallbacks': 'Catena di fallback',
+    'button.save': 'Salva',
+    checkout: {
+      pay_now: 'Paga ora',
     },
     home: {
       'hero.title': 'Internazionalizzazione senza stato globale',
@@ -135,8 +139,8 @@ export const catalogs = {
       'ssr.copy':
         'Questa scheda viene renderizzata interamente sul server. Passa al francese svizzero per vedere "Checkout" arrivare da fr-CH mentre "Save" ricade su fr.',
       'checkout.label': 'Pagamento',
-      'namespaces.copy':
-        'Il codice delle route può usare piccoli traduttori per namespace mentre tutta la risoluzione delle traduzioni resta sul server.',
+      'scopes.copy':
+        'Il codice delle route può usare chiavi gerarchiche dirette o un’opzione scope in stile Rails mentre tutta la risoluzione delle traduzioni resta sul server.',
       'intl.copy':
         'Il traduttore della richiesta espone anche primitive Intl native in cache per formattare, ordinare, segmentare e ispezionare i dati della locale.',
       'intl.numberFormat.description': 'Formattazione di valute e numeri',
@@ -164,19 +168,20 @@ export const catalogs = {
     },
   },
   de: {
-    common: {
-      'app.title': 'Remix Intl',
-      'app.subtitle': 'Ein Übersetzer pro Request für SSR, Hydration und Frames.',
-      'language.label': 'Sprache',
-      'language.submit': 'Dokument neu laden',
-      'nav.home': 'Übersicht',
-      'section.ssr': 'Vollständiges SSR',
-      'section.namespaces': 'Namespaces',
-      'section.pluralMessages': 'Pluralnachrichten',
-      'section.intl': 'Native Intl-Beispiele',
-      'badge.locale': 'Aktive Locale',
-      'badge.fallbacks': 'Fallback-Kette',
-      'button.save': 'Speichern',
+    'app.title': 'Remix Intl',
+    'app.subtitle': 'Ein Übersetzer pro Request für SSR, Hydration und Frames.',
+    'language.label': 'Sprache',
+    'language.submit': 'Dokument neu laden',
+    'nav.home': 'Übersicht',
+    'section.ssr': 'Vollständiges SSR',
+    'section.scopes': 'Scopes',
+    'section.pluralMessages': 'Pluralnachrichten',
+    'section.intl': 'Native Intl-Beispiele',
+    'badge.locale': 'Aktive Locale',
+    'badge.fallbacks': 'Fallback-Kette',
+    'button.save': 'Speichern',
+    checkout: {
+      pay_now: 'Jetzt bezahlen',
     },
     home: {
       'hero.title': 'Internationalisierung ohne globalen Zustand',
@@ -185,8 +190,8 @@ export const catalogs = {
       'ssr.copy':
         'Diese Karte wird vollständig auf dem Server gerendert. Wechsle zu Schweizer Französisch, um zu sehen, wie "Checkout" aus fr-CH kommt, während "Save" auf fr zurückfällt.',
       'checkout.label': 'Kasse',
-      'namespaces.copy':
-        'Route-Code kann kleine Namespace-Übersetzer verwenden, während die gesamte Übersetzungsauflösung auf dem Server bleibt.',
+      'scopes.copy':
+        'Route-Code kann direkte hierarchische Schlüssel oder eine Rails-artige scope-Option verwenden, während die gesamte Übersetzungsauflösung auf dem Server bleibt.',
       'intl.copy':
         'Der Request-Übersetzer stellt auch gecachte native Intl-Primitive zum Formatieren, Sortieren, Segmentieren und Prüfen von Locale-Daten bereit.',
       'intl.numberFormat.description': 'Währungs- und Zahlenformatierung',

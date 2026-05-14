@@ -15,17 +15,15 @@ export default createController(routes, {
       let render = get(Renderer)
       let translator = get(Translator)
       let locale = get(Locale)
-      let common = translator.namespace('common')
-      let home = translator.namespace('home')
       let intl = translator.intl
-      let intlExamples = getIntlExamples({ intl, locale, messages: home })
+      let intlExamples = getIntlExamples({ intl, locale, translator })
 
       return render(
         <Document
-          title={common.t('app.title')}
+          title={translator.t('app.title')}
           locale={locale}
-          languageLabel={common.t('language.label')}
-          languageSubmit={common.t('language.submit')}
+          languageLabel={translator.t('language.label')}
+          languageSubmit={translator.t('language.submit')}
         >
           <section
             style={{
@@ -38,11 +36,13 @@ export default createController(routes, {
           >
             <div>
               <p style={{ margin: '0 0 10px', color: '#52616b', fontWeight: 700 }}>
-                {common.t('nav.home')}
+                {translator.t('nav.home')}
               </p>
-              <h1 style={{ margin: 0, fontSize: 44, lineHeight: 1.05 }}>{home.t('hero.title')}</h1>
+              <h1 style={{ margin: 0, fontSize: 44, lineHeight: 1.05 }}>
+                {translator.t('home.hero.title')}
+              </h1>
               <p style={{ maxWidth: 720, color: '#52616b', fontSize: 18, lineHeight: 1.55 }}>
-                {home.t('hero.copy')}
+                {translator.t('home.hero.copy')}
               </p>
             </div>
 
@@ -54,9 +54,9 @@ export default createController(routes, {
                 padding: 16,
               }}
             >
-              <MetadataRow label={common.t('badge.locale')} value={localeNames[locale]} />
+              <MetadataRow label={translator.t('badge.locale')} value={localeNames[locale]} />
               <MetadataRow
-                label={common.t('badge.fallbacks')}
+                label={translator.t('badge.fallbacks')}
                 value={translator.fallbackChain.join(' -> ')}
               />
             </div>
@@ -70,34 +70,42 @@ export default createController(routes, {
               alignItems: 'stretch',
             }}
           >
-            <Panel title={common.t('section.ssr')}>
-              <p style={{ color: '#52616b', lineHeight: 1.5 }}>{home.t('ssr.copy')}</p>
+            <Panel title={translator.t('section.ssr')}>
+              <p style={{ color: '#52616b', lineHeight: 1.5 }}>{translator.t('home.ssr.copy')}</p>
               <dl style={{ display: 'grid', gridTemplateColumns: '120px 1fr', gap: 8 }}>
-                <dt style={{ color: '#52616b' }}>{common.t('button.save')}</dt>
-                <dd style={{ margin: 0, fontWeight: 700 }}>{common.t('button.save')}</dd>
+                <dt style={{ color: '#52616b' }}>{translator.t('button.save')}</dt>
+                <dd style={{ margin: 0, fontWeight: 700 }}>{translator.t('button.save')}</dd>
                 <dt style={{ color: '#52616b' }}>Checkout</dt>
-                <dd style={{ margin: 0, fontWeight: 700 }}>{home.t('checkout.label')}</dd>
+                <dd style={{ margin: 0, fontWeight: 700 }}>
+                  {translator.t('home.checkout.label')}
+                </dd>
               </dl>
             </Panel>
 
-            <Panel title={common.t('section.namespaces')}>
-              <p style={{ color: '#52616b', lineHeight: 1.5 }}>{home.t('namespaces.copy')}</p>
+            <Panel title={translator.t('section.scopes')}>
+              <p style={{ color: '#52616b', lineHeight: 1.5 }}>
+                {translator.t('home.scopes.copy')}
+              </p>
               <dl style={{ display: 'grid', gridTemplateColumns: '120px 1fr', gap: 8 }}>
-                <dt style={{ color: '#52616b' }}>common</dt>
-                <dd style={{ margin: 0, fontWeight: 700 }}>{common.t('button.save')}</dd>
-                <dt style={{ color: '#52616b' }}>home</dt>
-                <dd style={{ margin: 0, fontWeight: 700 }}>{home.t('hero.title')}</dd>
+                <dt style={{ color: '#52616b' }}>button.save</dt>
+                <dd style={{ margin: 0, fontWeight: 700 }}>{translator.t('button.save')}</dd>
+                <dt style={{ color: '#52616b' }}>scope</dt>
+                <dd style={{ margin: 0, fontWeight: 700 }}>
+                  {translator.t('pay_now', { scope: 'checkout' })}
+                </dd>
               </dl>
             </Panel>
 
             <PluralMessagesCard
-              title={common.t('section.pluralMessages')}
-              description={home.t('pluralMessages.description')}
-              values={[0, 1, 5].map((count) => home.t('pluralMessages.value', { count }))}
+              title={translator.t('section.pluralMessages')}
+              description={translator.t('description', { scope: 'home.pluralMessages' })}
+              values={[0, 1, 5].map((count) =>
+                translator.t('value', { scope: 'home.pluralMessages', count }),
+              )}
             />
 
-            <Panel title={common.t('section.intl')} wide>
-              <p style={{ color: '#52616b', lineHeight: 1.5 }}>{home.t('intl.copy')}</p>
+            <Panel title={translator.t('section.intl')} wide>
+              <p style={{ color: '#52616b', lineHeight: 1.5 }}>{translator.t('home.intl.copy')}</p>
               <div
                 style={{
                   display: 'grid',

@@ -6,33 +6,35 @@ import { createLocaleFallbacks, createTranslator, type IntlCatalogs } from './tr
 
 const catalogs: IntlCatalogs = {
   en: {
-    common: {
-      Save: 'Save',
-      Checkout: 'Checkout',
-      'cart.items': {
+    button: {
+      save: 'Save',
+    },
+    checkout: {
+      title: 'Checkout',
+      pay_now: 'Pay now',
+    },
+    cart: {
+      items: {
         one: '%{count} item',
         other: '%{count} items',
       },
     },
-    checkout: {
-      'Pay now': 'Pay now',
-    },
   },
   fr: {
-    common: {
-      Save: 'Enregistrer',
-      'cart.items': {
+    button: {
+      save: 'Enregistrer',
+    },
+    cart: {
+      items: {
         one: '%{count} article',
         other: '%{count} articles',
       },
     },
   },
   'fr-CH': {
-    common: {
-      Checkout: 'Commande',
-    },
     checkout: {
-      'Pay now': 'Payer maintenant',
+      title: 'Commande',
+      pay_now: 'Payer maintenant',
     },
   },
 }
@@ -55,9 +57,9 @@ describe('createTranslator', () => {
       catalogs,
     })
 
-    assert.equal(translator.t('Checkout'), 'Commande')
-    assert.equal(translator.t('Save'), 'Enregistrer')
-    assert.equal(translator.namespace('checkout').t('Pay now'), 'Payer maintenant')
+    assert.equal(translator.t('checkout.title'), 'Commande')
+    assert.equal(translator.t('button.save'), 'Enregistrer')
+    assert.equal(translator.t('checkout.pay_now'), 'Payer maintenant')
   })
 
   it('aliases translate to t', () => {
@@ -67,8 +69,29 @@ describe('createTranslator', () => {
       catalogs,
     })
 
-    assert.equal(translator.translate('Save'), 'Enregistrer')
-    assert.equal(translator.namespace('common').translate('Save'), 'Enregistrer')
+    assert.equal(translator.translate('button.save'), 'Enregistrer')
+  })
+
+  it('resolves scoped messages', () => {
+    let translator = createTranslator({
+      locale: 'fr-CH',
+      defaultLocale: 'en',
+      catalogs,
+    })
+
+    assert.equal(translator.t('pay_now', { scope: 'checkout' }), 'Payer maintenant')
+    assert.equal(translator.t('items', { scope: ['cart'], count: 3 }), '3 articles')
+  })
+
+  it('keeps namespace translators as scoped translator helpers', () => {
+    let translator = createTranslator({
+      locale: 'fr-CH',
+      defaultLocale: 'en',
+      catalogs,
+    })
+
+    assert.equal(translator.namespace('checkout').t('pay_now'), 'Payer maintenant')
+    assert.equal(translator.namespace('checkout').translate('title'), 'Commande')
   })
 
   it('formats plural messages with interpolation', () => {
@@ -88,8 +111,8 @@ describe('createTranslator', () => {
       defaultLocale: 'en',
       catalogs: {
         en: {
-          common: {
-            'inbox.unread': {
+          inbox: {
+            unread: {
               zero: 'No unread messages',
               one: '%{count} unread message',
               other: '%{count} unread messages',
@@ -121,7 +144,7 @@ describe('createTranslator', () => {
       defaultLocale: 'en-US',
       catalogs: {
         'en-US': {
-          common: {
+          checkout: {
             total: 'Total: %{amount}',
           },
         },
@@ -129,7 +152,7 @@ describe('createTranslator', () => {
     })
 
     assert.equal(
-      translator.t('total', {
+      translator.t('checkout.total', {
         values: { amount: number(1234.5, { style: 'currency', currency: 'USD' }) },
       }),
       'Total: $1,234.50',
