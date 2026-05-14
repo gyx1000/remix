@@ -53,6 +53,13 @@ export function getIntlExamples({
       description: messages.t('intl.pluralRules.description'),
     },
     {
+      name: 't() plural messages',
+      value: [1, 5]
+        .map((count) => messages.t('intl.pluralMessages.value', { count }))
+        .join(' · '),
+      description: messages.t('intl.pluralMessages.description'),
+    },
+    {
       name: 'Intl.Collator',
       value: ['zebra', 'éclair', 'avion'].sort(collator.compare).join(', '),
       description: messages.t('intl.collator.description'),

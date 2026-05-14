@@ -32,6 +32,11 @@ export const catalogs = {
       'intl.listFormat.description': 'Localized list separators',
       'intl.displayNames.description': 'Localized names for regions, languages, scripts, and more',
       'intl.pluralRules.description': 'Locale-specific plural categories',
+      'intl.pluralMessages.description': 'Rails-style plural translation with count interpolation',
+      'intl.pluralMessages.value': {
+        one: '%{count} unread message',
+        other: '%{count} unread messages',
+      },
       'intl.collator.description': 'Language-sensitive string sorting and comparison',
       'intl.segmenter.description': 'Locale-aware text segmentation',
       'intl.locale.description': 'Locale parsing and normalization',
@@ -75,6 +80,12 @@ export const catalogs = {
       'intl.displayNames.description':
         'Noms localisés pour les régions, langues, écritures et plus encore',
       'intl.pluralRules.description': 'Catégories de pluriel propres à la locale',
+      'intl.pluralMessages.description':
+        'Traduction de pluriels façon Rails avec interpolation du nombre',
+      'intl.pluralMessages.value': {
+        one: '%{count} message non lu',
+        other: '%{count} messages non lus',
+      },
       'intl.collator.description': 'Tri et comparaison de chaînes sensibles à la langue',
       'intl.segmenter.description': 'Segmentation de texte adaptée à la locale',
       'intl.locale.description': 'Analyse et normalisation des tags de locale',
@@ -91,6 +102,12 @@ export const catalogs = {
     },
     home: {
       'checkout.label': 'Commande',
+      'intl.pluralMessages.description':
+        'Traduction de pluriels façon Rails avec interpolation du nombre',
+      'intl.pluralMessages.value': {
+        one: '%{count} message non lu',
+        other: '%{count} messages non lus',
+      },
     },
   },
   'it-CH': {
@@ -126,6 +143,12 @@ export const catalogs = {
       'intl.displayNames.description':
         'Nomi localizzati per regioni, lingue, scritture e altro ancora',
       'intl.pluralRules.description': 'Categorie plurali specifiche della locale',
+      'intl.pluralMessages.description':
+        'Traduzione plurale in stile Rails con interpolazione del conteggio',
+      'intl.pluralMessages.value': {
+        one: '%{count} messaggio non letto',
+        other: '%{count} messaggi non letti',
+      },
       'intl.collator.description':
         'Ordinamento e confronto di stringhe sensibili alla lingua',
       'intl.segmenter.description': 'Segmentazione del testo sensibile alla locale',
@@ -170,6 +193,12 @@ export const catalogs = {
       'intl.displayNames.description':
         'Lokalisierte Namen für Regionen, Sprachen, Schriften und mehr',
       'intl.pluralRules.description': 'Locale-spezifische Pluralkategorien',
+      'intl.pluralMessages.description':
+        'Rails-artige Pluralübersetzung mit Interpolation der Anzahl',
+      'intl.pluralMessages.value': {
+        one: '%{count} ungelesene Nachricht',
+        other: '%{count} ungelesene Nachrichten',
+      },
       'intl.collator.description':
         'Sprachsensitives Sortieren und Vergleichen von Zeichenfolgen',
       'intl.segmenter.description': 'Locale-bewusste Textsegmentierung',
