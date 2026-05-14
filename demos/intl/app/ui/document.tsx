@@ -1,6 +1,6 @@
 import type { Handle, RemixNode } from 'remix/ui'
 
-import { localeNames, supportedLocales } from '../data/intl.ts'
+import { localeOptions } from '../data/intl.ts'
 
 type DocumentProps = {
   title: string
@@ -65,9 +65,9 @@ export function Document(handle: Handle<DocumentProps>) {
                     color: '#172026',
                   }}
                 >
-                  {supportedLocales.map((supportedLocale) => (
-                    <option value={supportedLocale} selected={supportedLocale === locale}>
-                      {localeNames[supportedLocale]}
+                  {localeOptions.map((option) => (
+                    <option value={option.locale} selected={option.locale === locale}>
+                      {option.name}
                     </option>
                   ))}
                 </select>
