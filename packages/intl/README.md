@@ -1,12 +1,12 @@
 # intl
 
-Composable Intl primitives for Remix applications. `intl` provides request-scoped locale negotiation, a cached facade over JavaScript's native `Intl` formatters, Rails-style `t()`/`translate()` message lookup, `l()`/`localize()` date-time localization, plural handling, and scoped keys without a global locale.
+Composable Intl primitives for Remix applications. `intl` provides request-scoped locale negotiation, a cached facade over JavaScript's native `Intl` formatters, `t()`/`translate()` message lookup, `l()`/`localize()` date-time localization, plural handling, and scoped keys without a global locale.
 
 ## Features
 
 - Request-scoped `Locale` and `Translator` context keys for backend code
-- Rails-style `t()`/`translate()` message lookup with interpolation and plural messages
-- Rails-style `l()`/`localize()` date-time localization
+- `t()`/`translate()` message lookup with interpolation and plural messages
+- `l()`/`localize()` date-time localization
 - Cached wrappers for `Intl.NumberFormat`, `Intl.DateTimeFormat`, `Intl.RelativeTimeFormat`, `Intl.ListFormat`, `Intl.DisplayNames`, `Intl.PluralRules`, `Intl.Collator`, and `Intl.Segmenter`
 - Tagged interpolation values like `number()`, `dateTime()`, `relativeTime()`, `list()`, and `displayName()`
 - Locale fallback chains such as `fr-CH -> fr -> en`
@@ -147,7 +147,7 @@ intl({
 
 ## Localizing dates
 
-Use `l()` or `localize()` for Rails-style date-time localization:
+Use `l()` or `localize()` for date-time localization:
 
 ```ts
 router.get('/today', (context) => {
@@ -168,7 +168,6 @@ Prefer a full document reload when the user changes language. Let the server upd
 
 ## Related Work
 
-- [Rails Internationalization API](https://guides.rubyonrails.org/i18n.html)
 - [ECMAScript Intl](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl)
 - [Unicode MessageFormat 2.0](https://github.com/unicode-org/message-format-wg)
 

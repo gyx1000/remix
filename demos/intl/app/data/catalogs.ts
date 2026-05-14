@@ -25,7 +25,7 @@ export const catalogs = {
         'This card is rendered entirely on the server. Switch to Swiss French to see "Checkout" come from fr-CH while "Save" falls back to fr.',
       'checkout.label': 'Checkout',
       'scopes.copy':
-        'Route code can use direct hierarchical keys or a Rails-style scope option while all translation lookup stays on the server.',
+        'Route code can use direct hierarchical keys or a scope option while all translation lookup stays on the server.',
       'intl.copy':
         'The request-scoped translator also exposes cached native Intl primitives for formatting, sorting, segmenting, and inspecting locale data.',
       'intl.numberFormat.description': 'Currency and number formatting',
@@ -74,7 +74,7 @@ export const catalogs = {
         'Cette carte est entièrement rendue côté serveur. Passez en français suisse pour voir "Checkout" venir de fr-CH pendant que "Save" retombe sur fr.',
       'checkout.label': 'Paiement',
       'scopes.copy':
-        'Le code des routes peut utiliser des clés hiérarchiques directes ou une option scope façon Rails pendant que toute la traduction reste côté serveur.',
+        'Le code des routes peut utiliser des clés hiérarchiques directes ou une option scope pendant que toute la traduction reste côté serveur.',
       'intl.copy':
         'Le traducteur de la requête expose aussi des primitives Intl natives mises en cache pour formater, trier, segmenter et inspecter les données de locale.',
       'intl.numberFormat.description': 'Formatage des devises et des nombres',
@@ -140,7 +140,7 @@ export const catalogs = {
         'Questa scheda viene renderizzata interamente sul server. Passa al francese svizzero per vedere "Checkout" arrivare da fr-CH mentre "Save" ricade su fr.',
       'checkout.label': 'Pagamento',
       'scopes.copy':
-        'Il codice delle route può usare chiavi gerarchiche dirette o un’opzione scope in stile Rails mentre tutta la risoluzione delle traduzioni resta sul server.',
+        'Il codice delle route può usare chiavi gerarchiche dirette o un’opzione scope mentre tutta la risoluzione delle traduzioni resta sul server.',
       'intl.copy':
         'Il traduttore della richiesta espone anche primitive Intl native in cache per formattare, ordinare, segmentare e ispezionare i dati della locale.',
       'intl.numberFormat.description': 'Formattazione di valute e numeri',
@@ -191,7 +191,7 @@ export const catalogs = {
         'Diese Karte wird vollständig auf dem Server gerendert. Wechsle zu Schweizer Französisch, um zu sehen, wie "Checkout" aus fr-CH kommt, während "Save" auf fr zurückfällt.',
       'checkout.label': 'Kasse',
       'scopes.copy':
-        'Route-Code kann direkte hierarchische Schlüssel oder eine Rails-artige scope-Option verwenden, während die gesamte Übersetzungsauflösung auf dem Server bleibt.',
+        'Route-Code kann direkte hierarchische Schlüssel oder eine scope-Option verwenden, während die gesamte Übersetzungsauflösung auf dem Server bleibt.',
       'intl.copy':
         'Der Request-Übersetzer stellt auch gecachte native Intl-Primitive zum Formatieren, Sortieren, Segmentieren und Prüfen von Locale-Daten bereit.',
       'intl.numberFormat.description': 'Währungs- und Zahlenformatierung',
