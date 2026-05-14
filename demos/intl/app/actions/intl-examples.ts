@@ -44,7 +44,12 @@ export function getIntlExamples({
     },
     {
       name: 'Intl.DisplayNames',
-      value: intl.formatDisplayName('CH', { type: 'region' }),
+      value: [
+        `Region: ${intl.formatDisplayName('CH', { type: 'region' })}`,
+        `Language: ${intl.formatDisplayName('de', { type: 'language' })}`,
+        `Currency: ${intl.formatDisplayName('CHF', { type: 'currency' })}`,
+        `Calendar: ${intl.formatDisplayName('gregory', { type: 'calendar' })}`,
+      ].join('\n'),
       description: translator.t('displayNames.description', { scope: 'home.intl' }),
     },
     {
