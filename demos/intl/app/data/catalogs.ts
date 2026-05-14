@@ -10,6 +10,7 @@ export const catalogs = {
       'nav.home': 'Overview',
       'section.ssr': 'Full SSR',
       'section.namespaces': 'Namespaces',
+      'section.pluralMessages': 'Plural messages',
       'section.intl': 'Native Intl examples',
       'badge.locale': 'Active locale',
       'badge.fallbacks': 'Fallback chain',
@@ -32,8 +33,8 @@ export const catalogs = {
       'intl.listFormat.description': 'Localized list separators',
       'intl.displayNames.description': 'Localized names for regions, languages, scripts, and more',
       'intl.pluralRules.description': 'Locale-specific plural categories',
-      'intl.pluralMessages.description': 'Rails-style plural translation with count interpolation',
-      'intl.pluralMessages.value': {
+      'pluralMessages.description': 'The translator selects the right message by count.',
+      'pluralMessages.value': {
         one: '%{count} unread message',
         other: '%{count} unread messages',
       },
@@ -56,6 +57,7 @@ export const catalogs = {
       'nav.home': 'Vue d’ensemble',
       'section.ssr': 'SSR complet',
       'section.namespaces': 'Namespaces',
+      'section.pluralMessages': 'Messages pluriels',
       'section.intl': 'Exemples Intl natifs',
       'badge.locale': 'Locale active',
       'badge.fallbacks': 'Chaîne de fallback',
@@ -80,9 +82,8 @@ export const catalogs = {
       'intl.displayNames.description':
         'Noms localisés pour les régions, langues, écritures et plus encore',
       'intl.pluralRules.description': 'Catégories de pluriel propres à la locale',
-      'intl.pluralMessages.description':
-        'Traduction de pluriels façon Rails avec interpolation du nombre',
-      'intl.pluralMessages.value': {
+      'pluralMessages.description': 'Le traducteur choisit le bon message selon le nombre.',
+      'pluralMessages.value': {
         one: '%{count} message non lu',
         other: '%{count} messages non lus',
       },
@@ -102,9 +103,8 @@ export const catalogs = {
     },
     home: {
       'checkout.label': 'Commande',
-      'intl.pluralMessages.description':
-        'Traduction de pluriels façon Rails avec interpolation du nombre',
-      'intl.pluralMessages.value': {
+      'pluralMessages.description': 'Le traducteur choisit le bon message selon le nombre.',
+      'pluralMessages.value': {
         one: '%{count} message non lu',
         other: '%{count} messages non lus',
       },
@@ -119,6 +119,7 @@ export const catalogs = {
       'nav.home': 'Panoramica',
       'section.ssr': 'SSR completo',
       'section.namespaces': 'Namespace',
+      'section.pluralMessages': 'Messaggi plurali',
       'section.intl': 'Esempi Intl nativi',
       'badge.locale': 'Locale attiva',
       'badge.fallbacks': 'Catena di fallback',
@@ -136,21 +137,19 @@ export const catalogs = {
       'intl.copy':
         'Il traduttore della richiesta espone anche primitive Intl native in cache per formattare, ordinare, segmentare e ispezionare i dati della locale.',
       'intl.numberFormat.description': 'Formattazione di valute e numeri',
-      'intl.dateTimeFormat.description':
-        'Formattazione di date, orari, calendari e fusi orari',
+      'intl.dateTimeFormat.description': 'Formattazione di date, orari, calendari e fusi orari',
       'intl.relativeTimeFormat.description': 'Tempo relativo leggibile',
       'intl.listFormat.description': 'Separatori di elenco localizzati',
       'intl.displayNames.description':
         'Nomi localizzati per regioni, lingue, scritture e altro ancora',
       'intl.pluralRules.description': 'Categorie plurali specifiche della locale',
-      'intl.pluralMessages.description':
-        'Traduzione plurale in stile Rails con interpolazione del conteggio',
-      'intl.pluralMessages.value': {
+      'pluralMessages.description':
+        'Il traduttore sceglie il messaggio corretto in base al conteggio.',
+      'pluralMessages.value': {
         one: '%{count} messaggio non letto',
         other: '%{count} messaggi non letti',
       },
-      'intl.collator.description':
-        'Ordinamento e confronto di stringhe sensibili alla lingua',
+      'intl.collator.description': 'Ordinamento e confronto di stringhe sensibili alla lingua',
       'intl.segmenter.description': 'Segmentazione del testo sensibile alla locale',
       'intl.locale.description': 'Analisi e normalizzazione dei tag di locale',
       'intl.durationFormat.description':
@@ -169,6 +168,7 @@ export const catalogs = {
       'nav.home': 'Übersicht',
       'section.ssr': 'Vollständiges SSR',
       'section.namespaces': 'Namespaces',
+      'section.pluralMessages': 'Pluralnachrichten',
       'section.intl': 'Native Intl-Beispiele',
       'badge.locale': 'Aktive Locale',
       'badge.fallbacks': 'Fallback-Kette',
@@ -186,21 +186,19 @@ export const catalogs = {
       'intl.copy':
         'Der Request-Übersetzer stellt auch gecachte native Intl-Primitive zum Formatieren, Sortieren, Segmentieren und Prüfen von Locale-Daten bereit.',
       'intl.numberFormat.description': 'Währungs- und Zahlenformatierung',
-      'intl.dateTimeFormat.description':
-        'Formatierung von Datum, Uhrzeit, Kalendern und Zeitzonen',
+      'intl.dateTimeFormat.description': 'Formatierung von Datum, Uhrzeit, Kalendern und Zeitzonen',
       'intl.relativeTimeFormat.description': 'Lesbare relative Zeitangaben',
       'intl.listFormat.description': 'Lokalisierte Listentrennzeichen',
       'intl.displayNames.description':
         'Lokalisierte Namen für Regionen, Sprachen, Schriften und mehr',
       'intl.pluralRules.description': 'Locale-spezifische Pluralkategorien',
-      'intl.pluralMessages.description':
-        'Rails-artige Pluralübersetzung mit Interpolation der Anzahl',
-      'intl.pluralMessages.value': {
+      'pluralMessages.description':
+        'Der Übersetzer wählt anhand der Anzahl die passende Nachricht.',
+      'pluralMessages.value': {
         one: '%{count} ungelesene Nachricht',
         other: '%{count} ungelesene Nachrichten',
       },
-      'intl.collator.description':
-        'Sprachsensitives Sortieren und Vergleichen von Zeichenfolgen',
+      'intl.collator.description': 'Sprachsensitives Sortieren und Vergleichen von Zeichenfolgen',
       'intl.segmenter.description': 'Locale-bewusste Textsegmentierung',
       'intl.locale.description': 'Parsen und Normalisieren von Locale-Tags',
       'intl.durationFormat.description':

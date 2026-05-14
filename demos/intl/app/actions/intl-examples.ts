@@ -53,13 +53,6 @@ export function getIntlExamples({
       description: messages.t('intl.pluralRules.description'),
     },
     {
-      name: 't() plural messages',
-      value: [1, 5]
-        .map((count) => messages.t('intl.pluralMessages.value', { count }))
-        .join(' · '),
-      description: messages.t('intl.pluralMessages.description'),
-    },
-    {
       name: 'Intl.Collator',
       value: ['zebra', 'éclair', 'avion'].sort(collator.compare).join(', '),
       description: messages.t('intl.collator.description'),
@@ -96,12 +89,14 @@ export function getIntlExamples({
 }
 
 function formatDuration(locale: string): string {
-  let DurationFormat = (Intl as typeof Intl & {
-    DurationFormat?: new (
-      locales?: string | string[],
-      options?: { style?: 'long' | 'short' | 'narrow' | 'digital' },
-    ) => { format(duration: { hours: number; minutes: number }): string }
-  }).DurationFormat
+  let DurationFormat = (
+    Intl as typeof Intl & {
+      DurationFormat?: new (
+        locales?: string | string[],
+        options?: { style?: 'long' | 'short' | 'narrow' | 'digital' },
+      ) => { format(duration: { hours: number; minutes: number }): string }
+    }
+  ).DurationFormat
 
   if (DurationFormat === undefined) return 'Not supported by this runtime'
 
