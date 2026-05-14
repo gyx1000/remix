@@ -93,4 +93,92 @@ export const catalogs = {
       'checkout.label': 'Commande',
     },
   },
+  'it-CH': {
+    common: {
+      'app.title': 'Remix Intl',
+      'app.subtitle': 'Un traduttore per richiesta per SSR, idratazione e Frames.',
+      'language.label': 'Lingua',
+      'language.submit': 'Ricarica il documento',
+      'nav.home': 'Panoramica',
+      'section.ssr': 'SSR completo',
+      'section.namespaces': 'Namespace',
+      'section.intl': 'Esempi Intl nativi',
+      'badge.locale': 'Locale attiva',
+      'badge.fallbacks': 'Catena di fallback',
+      'button.save': 'Salva',
+    },
+    home: {
+      'hero.title': 'Internazionalizzazione senza stato globale',
+      'hero.copy':
+        'Il server negozia la locale, risolve i cataloghi di fallback e renderizza HTML tradotto per ogni richiesta.',
+      'ssr.copy':
+        'Questa scheda viene renderizzata interamente sul server. Passa al francese svizzero per vedere "Checkout" arrivare da fr-CH mentre "Save" ricade su fr.',
+      'checkout.label': 'Pagamento',
+      'namespaces.copy':
+        'Il codice delle route può usare piccoli traduttori per namespace mentre tutta la risoluzione delle traduzioni resta sul server.',
+      'intl.copy':
+        'Il traduttore della richiesta espone anche primitive Intl native in cache per formattare, ordinare, segmentare e ispezionare i dati della locale.',
+      'intl.numberFormat.description': 'Formattazione di valute e numeri',
+      'intl.dateTimeFormat.description':
+        'Formattazione di date, orari, calendari e fusi orari',
+      'intl.relativeTimeFormat.description': 'Tempo relativo leggibile',
+      'intl.listFormat.description': 'Separatori di elenco localizzati',
+      'intl.displayNames.description':
+        'Nomi localizzati per regioni, lingue, scritture e altro ancora',
+      'intl.pluralRules.description': 'Categorie plurali specifiche della locale',
+      'intl.collator.description':
+        'Ordinamento e confronto di stringhe sensibili alla lingua',
+      'intl.segmenter.description': 'Segmentazione del testo sensibile alla locale',
+      'intl.locale.description': 'Analisi e normalizzazione dei tag di locale',
+      'intl.durationFormat.description':
+        'Durate strutturate localizzate quando supportate dal runtime',
+      'intl.getCanonicalLocales.description': 'Canonicalizzazione dei tag di locale',
+      'intl.supportedValuesOf.description':
+        'Calendari, valute, unità, fusi orari e altri valori supportati dal runtime',
+    },
+  },
+  'de-CH': {
+    common: {
+      'app.title': 'Remix Intl',
+      'app.subtitle': 'Ein Übersetzer pro Request für SSR, Hydration und Frames.',
+      'language.label': 'Sprache',
+      'language.submit': 'Dokument neu laden',
+      'nav.home': 'Übersicht',
+      'section.ssr': 'Vollständiges SSR',
+      'section.namespaces': 'Namespaces',
+      'section.intl': 'Native Intl-Beispiele',
+      'badge.locale': 'Aktive Locale',
+      'badge.fallbacks': 'Fallback-Kette',
+      'button.save': 'Speichern',
+    },
+    home: {
+      'hero.title': 'Internationalisierung ohne globalen Zustand',
+      'hero.copy':
+        'Der Server handelt die Locale aus, löst Fallback-Kataloge auf und rendert übersetztes HTML für jeden Request.',
+      'ssr.copy':
+        'Diese Karte wird vollständig auf dem Server gerendert. Wechsle zu Schweizer Französisch, um zu sehen, wie "Checkout" aus fr-CH kommt, während "Save" auf fr zurückfällt.',
+      'checkout.label': 'Kasse',
+      'namespaces.copy':
+        'Route-Code kann kleine Namespace-Übersetzer verwenden, während die gesamte Übersetzungsauflösung auf dem Server bleibt.',
+      'intl.copy':
+        'Der Request-Übersetzer stellt auch gecachte native Intl-Primitive zum Formatieren, Sortieren, Segmentieren und Prüfen von Locale-Daten bereit.',
+      'intl.numberFormat.description': 'Währungs- und Zahlenformatierung',
+      'intl.dateTimeFormat.description':
+        'Formatierung von Datum, Uhrzeit, Kalendern und Zeitzonen',
+      'intl.relativeTimeFormat.description': 'Lesbare relative Zeitangaben',
+      'intl.listFormat.description': 'Lokalisierte Listentrennzeichen',
+      'intl.displayNames.description':
+        'Lokalisierte Namen für Regionen, Sprachen, Schriften und mehr',
+      'intl.pluralRules.description': 'Locale-spezifische Pluralkategorien',
+      'intl.collator.description':
+        'Sprachsensitives Sortieren und Vergleichen von Zeichenfolgen',
+      'intl.segmenter.description': 'Locale-bewusste Textsegmentierung',
+      'intl.locale.description': 'Parsen und Normalisieren von Locale-Tags',
+      'intl.durationFormat.description':
+        'Lokalisierte strukturierte Dauern, wenn sie vom Runtime unterstützt werden',
+      'intl.getCanonicalLocales.description': 'Kanonisierung von Locale-Tags',
+      'intl.supportedValuesOf.description':
+        'Vom Runtime unterstützte Kalender, Währungen, Einheiten, Zeitzonen und weitere Werte',
+    },
+  },
 } satisfies IntlCatalogs
