@@ -9,7 +9,7 @@ import { render } from './middleware/render.ts'
 import { routes } from './routes.ts'
 
 const intlMiddleware = intl({
-  supportedLocales: ['en', 'fr', 'fr-CH', 'de-CH', 'it-CH'] as const,
+  supportedLocales: ['en', 'fr-FR', 'fr-CH', 'de-CH', 'it-CH'] as const,
   defaultLocale: 'en',
   catalogs,
   getLocale(context) {
