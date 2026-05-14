@@ -2,7 +2,6 @@ import * as assert from '@remix-run/assert'
 import { describe, it } from '@remix-run/test'
 
 import { number } from './intl.ts'
-import { gettextLazy, ngettextLazy, pgettextLazy } from './lazy-message.ts'
 import { createLocaleFallbacks, createTranslator, type IntlCatalogs } from './translator.ts'
 
 const catalogs: IntlCatalogs = {
@@ -14,7 +13,6 @@ const catalogs: IntlCatalogs = {
         one: '%{count} item',
         other: '%{count} items',
       },
-      'button\u0004Archive': 'Archive',
     },
     checkout: {
       'Pay now': 'Pay now',
@@ -27,7 +25,6 @@ const catalogs: IntlCatalogs = {
         one: '%{count} article',
         other: '%{count} articles',
       },
-      'button\u0004Archive': 'Archiver',
     },
   },
   'fr-CH': {
@@ -58,9 +55,20 @@ describe('createTranslator', () => {
       catalogs,
     })
 
-    assert.equal(translator.gettext('Checkout'), 'Commande')
-    assert.equal(translator.gettext('Save'), 'Enregistrer')
-    assert.equal(translator.namespace('checkout').gettext('Pay now'), 'Payer maintenant')
+    assert.equal(translator.t('Checkout'), 'Commande')
+    assert.equal(translator.t('Save'), 'Enregistrer')
+    assert.equal(translator.namespace('checkout').t('Pay now'), 'Payer maintenant')
+  })
+
+  it('aliases translate to t', () => {
+    let translator = createTranslator({
+      locale: 'fr',
+      defaultLocale: 'en',
+      catalogs,
+    })
+
+    assert.equal(translator.translate('Save'), 'Enregistrer')
+    assert.equal(translator.namespace('common').translate('Save'), 'Enregistrer')
   })
 
   it('formats plural messages with interpolation', () => {
@@ -70,32 +78,19 @@ describe('createTranslator', () => {
       catalogs,
     })
 
-    assert.equal(translator.ngettext('cart.items', 'cart.items', 1), '1 article')
-    assert.equal(translator.ngettext('cart.items', 'cart.items', 3), '3 articles')
+    assert.equal(translator.t('cart.items', { count: 1 }), '1 article')
+    assert.equal(translator.t('cart.items', { count: 3 }), '3 articles')
   })
 
-  it('uses gettext fallbacks for missing plural messages', () => {
+  it('falls back to the key or default value for missing messages', () => {
     let translator = createTranslator({
       locale: 'en',
       defaultLocale: 'en',
       catalogs,
     })
 
-    assert.equal(translator.ngettext('%{count} file', '%{count} files', 1), '1 file')
-    assert.equal(translator.ngettext('%{count} file', '%{count} files', 2), '2 files')
-  })
-
-  it('resolves contextual and lazy messages', () => {
-    let translator = createTranslator({
-      locale: 'fr',
-      defaultLocale: 'en',
-      catalogs,
-    })
-
-    assert.equal(translator.pgettext('button', 'Archive'), 'Archiver')
-    assert.equal(translator.resolve(gettextLazy('Save')), 'Enregistrer')
-    assert.equal(translator.resolve(pgettextLazy('button', 'Archive')), 'Archiver')
-    assert.equal(translator.resolve(ngettextLazy('cart.items', 'cart.items', 2)), '2 articles')
+    assert.equal(translator.t('missing.key'), 'missing.key')
+    assert.equal(translator.t('missing.key', { defaultValue: 'Fallback' }), 'Fallback')
   })
 
   it('formats tagged Intl values during interpolation', () => {
@@ -112,10 +107,23 @@ describe('createTranslator', () => {
     })
 
     assert.equal(
-      translator.gettext('total', {
+      translator.t('total', {
         values: { amount: number(1234.5, { style: 'currency', currency: 'USD' }) },
       }),
       'Total: $1,234.50',
+    )
+  })
+
+  it('localizes date and time values', () => {
+    let translator = createTranslator({
+      locale: 'en-US',
+      defaultLocale: 'en-US',
+      catalogs,
+    })
+
+    assert.equal(
+      translator.l(new Date('2026-05-14T10:30:00Z'), { timeZone: 'UTC', dateStyle: 'medium' }),
+      'May 14, 2026',
     )
   })
 

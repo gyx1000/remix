@@ -1,5 +1,10 @@
-import type { LazyMessage } from './lazy-message.ts'
-import { createIntl, type IntlFormatValue, type RemixIntl } from './intl.ts'
+import {
+  createIntl,
+  dateTime,
+  type IntlDateTimeValue,
+  type IntlFormatValue,
+  type RemixIntl,
+} from './intl.ts'
 
 export interface IntlPluralMessages {
   [key: string]: string | undefined
@@ -24,7 +29,6 @@ export interface IntlMessageOptions {
   count?: number
   values?: Record<string, IntlFormatValue | unknown>
   defaultValue?: string
-  context?: string
 }
 
 export interface IntlTranslatorOptions {
@@ -40,25 +44,7 @@ export interface NamespaceTranslator {
   readonly locale: string
   readonly namespaceName: string
   t(key: string, options?: Omit<IntlMessageOptions, 'namespace'>): string
-  gettext(message: string, options?: Omit<IntlMessageOptions, 'namespace'>): string
-  pgettext(
-    context: string,
-    message: string,
-    options?: Omit<IntlMessageOptions, 'namespace' | 'context'>,
-  ): string
-  ngettext(
-    singular: string,
-    plural: string,
-    count: number,
-    options?: Omit<IntlMessageOptions, 'namespace' | 'count'>,
-  ): string
-  npgettext(
-    context: string,
-    singular: string,
-    plural: string,
-    count: number,
-    options?: Omit<IntlMessageOptions, 'namespace' | 'count' | 'context'>,
-  ): string
+  translate(key: string, options?: Omit<IntlMessageOptions, 'namespace'>): string
 }
 
 export interface Translator {
@@ -68,22 +54,9 @@ export interface Translator {
   readonly fallbackChain: readonly string[]
   readonly intl: RemixIntl
   t(key: string, options?: IntlMessageOptions): string
-  gettext(message: string, options?: IntlMessageOptions): string
-  pgettext(context: string, message: string, options?: Omit<IntlMessageOptions, 'context'>): string
-  ngettext(
-    singular: string,
-    plural: string,
-    count: number,
-    options?: Omit<IntlMessageOptions, 'count'>,
-  ): string
-  npgettext(
-    context: string,
-    singular: string,
-    plural: string,
-    count: number,
-    options?: Omit<IntlMessageOptions, 'count' | 'context'>,
-  ): string
-  resolve(message: LazyMessage): string
+  translate(key: string, options?: IntlMessageOptions): string
+  l(value: IntlDateTimeValue, options?: Intl.DateTimeFormatOptions): string
+  localize(value: IntlDateTimeValue, options?: Intl.DateTimeFormatOptions): string
   namespace(namespace: string): NamespaceTranslator
 }
 
@@ -128,74 +101,21 @@ class DefaultTranslator implements Translator {
 
   t(key: string, options: IntlMessageOptions = {}): string {
     let namespace = options.namespace ?? this.defaultNamespace
-    let messageKey = options.context ? contextualKey(options.context, key) : key
-    let message = this.#findMessage(namespace, messageKey)
-
-    if (message === undefined && options.context) {
-      message = this.#findMessage(namespace, key)
-    }
-
+    let message = this.#findMessage(namespace, key)
     let fallback = options.defaultValue ?? key
     return this.#format(message, fallback, options)
   }
 
-  gettext(message: string, options?: IntlMessageOptions): string {
-    return this.t(message, options)
+  translate(key: string, options?: IntlMessageOptions): string {
+    return this.t(key, options)
   }
 
-  pgettext(
-    context: string,
-    message: string,
-    options?: Omit<IntlMessageOptions, 'context'>,
-  ): string {
-    return this.t(message, { ...options, context })
+  l(value: IntlDateTimeValue, options?: Intl.DateTimeFormatOptions): string {
+    return this.localize(value, options)
   }
 
-  ngettext(
-    singular: string,
-    plural: string,
-    count: number,
-    options?: Omit<IntlMessageOptions, 'count'>,
-  ): string {
-    return this.t(singular, {
-      ...options,
-      count,
-      defaultValue: selectPluralFallback(this.intl, singular, plural, count),
-    })
-  }
-
-  npgettext(
-    context: string,
-    singular: string,
-    plural: string,
-    count: number,
-    options?: Omit<IntlMessageOptions, 'count' | 'context'>,
-  ): string {
-    return this.t(singular, {
-      ...options,
-      context,
-      count,
-      defaultValue: selectPluralFallback(this.intl, singular, plural, count),
-    })
-  }
-
-  resolve(message: LazyMessage): string {
-    switch (message.type) {
-      case 'gettext':
-        return this.gettext(message.message, message.options)
-      case 'pgettext':
-        return this.pgettext(message.context, message.message, message.options)
-      case 'ngettext':
-        return this.ngettext(message.singular, message.plural, message.count, message.options)
-      case 'npgettext':
-        return this.npgettext(
-          message.context,
-          message.singular,
-          message.plural,
-          message.count,
-          message.options,
-        )
-    }
+  localize(value: IntlDateTimeValue, options?: Intl.DateTimeFormatOptions): string {
+    return this.intl.formatValue(dateTime(value, options))
   }
 
   namespace(namespace: string): NamespaceTranslator {
@@ -239,41 +159,8 @@ class DefaultNamespaceTranslator implements NamespaceTranslator {
     return this.#translator.t(key, { ...options, namespace: this.namespaceName })
   }
 
-  gettext(message: string, options?: Omit<IntlMessageOptions, 'namespace'>): string {
-    return this.t(message, options)
-  }
-
-  pgettext(
-    context: string,
-    message: string,
-    options?: Omit<IntlMessageOptions, 'namespace' | 'context'>,
-  ): string {
-    return this.t(message, { ...options, context })
-  }
-
-  ngettext(
-    singular: string,
-    plural: string,
-    count: number,
-    options?: Omit<IntlMessageOptions, 'namespace' | 'count'>,
-  ): string {
-    return this.#translator.ngettext(singular, plural, count, {
-      ...options,
-      namespace: this.namespaceName,
-    })
-  }
-
-  npgettext(
-    context: string,
-    singular: string,
-    plural: string,
-    count: number,
-    options?: Omit<IntlMessageOptions, 'namespace' | 'count' | 'context'>,
-  ): string {
-    return this.#translator.npgettext(context, singular, plural, count, {
-      ...options,
-      namespace: this.namespaceName,
-    })
+  translate(key: string, options?: Omit<IntlMessageOptions, 'namespace'>): string {
+    return this.t(key, options)
   }
 }
 
@@ -300,19 +187,6 @@ function resolveFallbackChain(options: IntlTranslatorOptions): readonly string[]
 
 function appendUnique(values: string[], value: string): void {
   if (!values.includes(value)) values.push(value)
-}
-
-function contextualKey(context: string, key: string): string {
-  return `${context}\u0004${key}`
-}
-
-function selectPluralFallback(
-  intl: RemixIntl,
-  singular: string,
-  plural: string,
-  count: number,
-): string {
-  return intl.selectPlural(count) === 'one' ? singular : plural
 }
 
 function interpolate(intl: RemixIntl, message: string, options: IntlMessageOptions): string {
