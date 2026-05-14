@@ -19,6 +19,7 @@ export const catalogs: IntlCatalogs = {
       'nav.home': 'Overview',
       'section.ssr': 'Full SSR',
       'section.namespaces': 'Namespaces',
+      'section.intl': 'Native Intl examples',
       'badge.locale': 'Active locale',
       'badge.fallbacks': 'Fallback chain',
       'button.save': 'Save',
@@ -32,6 +33,8 @@ export const catalogs: IntlCatalogs = {
       'checkout.label': 'Checkout',
       'namespaces.copy':
         'Route code can use small namespace-scoped translators while all translation lookup stays on the server.',
+      'intl.copy':
+        'The request-scoped translator also exposes cached native Intl primitives for formatting, sorting, segmenting, and inspecting locale data.',
     },
   },
   fr: {
@@ -43,6 +46,7 @@ export const catalogs: IntlCatalogs = {
       'nav.home': 'Vue d’ensemble',
       'section.ssr': 'SSR complet',
       'section.namespaces': 'Namespaces',
+      'section.intl': 'Exemples Intl natifs',
       'badge.locale': 'Locale active',
       'badge.fallbacks': 'Chaîne de fallback',
       'button.save': 'Enregistrer',
@@ -56,6 +60,8 @@ export const catalogs: IntlCatalogs = {
       'checkout.label': 'Paiement',
       'namespaces.copy':
         'Le code des routes peut utiliser de petits traducteurs par namespace pendant que toute la traduction reste côté serveur.',
+      'intl.copy':
+        'Le traducteur de la requête expose aussi des primitives Intl natives mises en cache pour formater, trier, segmenter et inspecter les données de locale.',
     },
   },
   'fr-CH': {
