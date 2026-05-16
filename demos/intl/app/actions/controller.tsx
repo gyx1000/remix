@@ -28,12 +28,8 @@ export default createController(routes, {
           languageSubmit={translator.t('language.submit')}
         >
           <section
+            className="intl-hero"
             style={{
-              display: 'grid',
-              gridTemplateColumns: 'minmax(0, 1.4fr) minmax(280px, 0.6fr)',
-              gap: 20,
-              alignItems: 'start',
-              marginBottom: 20,
             }}
           >
             <div>
@@ -65,16 +61,13 @@ export default createController(routes, {
           </section>
 
           <div
+            className="intl-content-grid"
             style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
-              gap: 16,
-              alignItems: 'stretch',
             }}
           >
             <Panel title={translator.t('section.ssr')}>
               <p style={{ color: '#52616b', lineHeight: 1.5 }}>{translator.t('home.ssr.copy')}</p>
-              <dl style={{ display: 'grid', gridTemplateColumns: '120px 1fr', gap: 8 }}>
+              <dl className="intl-definition-list">
                 <dt style={{ color: '#52616b' }}>{translator.t('button.save')}</dt>
                 <dd style={{ margin: 0, fontWeight: 700 }}>{translator.t('button.save')}</dd>
                 <dt style={{ color: '#52616b' }}>Checkout</dt>
@@ -88,7 +81,7 @@ export default createController(routes, {
               <p style={{ color: '#52616b', lineHeight: 1.5 }}>
                 {translator.t('home.scopes.copy')}
               </p>
-              <dl style={{ display: 'grid', gridTemplateColumns: '120px 1fr', gap: 8 }}>
+              <dl className="intl-definition-list">
                 <dt style={{ color: '#52616b' }}>button.save</dt>
                 <dd style={{ margin: 0, fontWeight: 700 }}>{translator.t('button.save')}</dd>
                 <dt style={{ color: '#52616b' }}>translator.scope</dt>
@@ -105,10 +98,8 @@ export default createController(routes, {
             <Panel title={translator.t('section.intl')} wide>
               <p style={{ color: '#52616b', lineHeight: 1.5 }}>{translator.t('home.intl.copy')}</p>
               <div
+                className="intl-examples-grid"
                 style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
-                  gap: 12,
                 }}
               >
                 {intlExamples.map((example) => (
