@@ -56,6 +56,7 @@ export interface Translator {
   translate(key: string, options?: IntlMessageOptions): string
   l(value: IntlDateTimeValue, options?: Intl.DateTimeFormatOptions): string
   localize(value: IntlDateTimeValue, options?: Intl.DateTimeFormatOptions): string
+  s(scope: string): ScopedTranslator
   scope(scope: string): ScopedTranslator
 }
 
@@ -110,6 +111,10 @@ class DefaultTranslator implements Translator {
 
   localize(value: IntlDateTimeValue, options?: Intl.DateTimeFormatOptions): string {
     return this.intl.formatValue(dateTime(value, options))
+  }
+
+  s(scope: string): ScopedTranslator {
+    return this.scope(scope)
   }
 
   scope(scope: string): ScopedTranslator {

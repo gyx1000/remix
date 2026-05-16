@@ -110,11 +110,11 @@ intl.segment('Hello world', { granularity: 'word' })
 
 ## Scoped Translators
 
-Use direct hierarchical keys or `translator.scope()` to resolve messages under a shared prefix:
+Use direct hierarchical keys or `translator.scope()` to resolve messages under a shared prefix. `translator.s()` is available as a shorter alias:
 
 ```ts
 router.get('/checkout', (context) => {
-  let t = context.get(Translator).scope('checkout')
+  let t = context.get(Translator).s('checkout')
 
   return new Response(t.t('pay_now'))
 })

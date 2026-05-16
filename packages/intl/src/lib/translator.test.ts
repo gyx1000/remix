@@ -87,6 +87,7 @@ describe('createTranslator', () => {
 
     assert.equal(translator.scope('checkout').t('pay_now'), 'Payer maintenant')
     assert.equal(translator.scope('checkout').translate('title'), 'Commande')
+    assert.equal(translator.s('checkout').t('pay_now'), 'Payer maintenant')
   })
 
   it('passes message options through scoped translator helpers', () => {
