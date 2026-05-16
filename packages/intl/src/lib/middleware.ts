@@ -28,7 +28,12 @@ export interface IntlMiddlewareOptions {
 
 export function intl(
   options: IntlMiddlewareOptions,
-): Middleware<readonly [[typeof Locale, string], [typeof Translator, TranslatorValue]]> {
+): Middleware<
+  readonly [
+    { key: typeof Locale; value: string },
+    { key: typeof Translator; value: TranslatorValue },
+  ]
+> {
   return async (context) => {
     let locale = await resolveLocale(context, options)
     let fallbackLocales =

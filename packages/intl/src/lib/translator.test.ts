@@ -83,17 +83,6 @@ describe('createTranslator', () => {
     assert.equal(translator.t('items', { scope: ['cart'], count: 3 }), '3 articles')
   })
 
-  it('keeps namespace translators as scoped translator helpers', () => {
-    let translator = createTranslator({
-      locale: 'fr-CH',
-      defaultLocale: 'en',
-      catalogs,
-    })
-
-    assert.equal(translator.namespace('checkout').t('pay_now'), 'Payer maintenant')
-    assert.equal(translator.namespace('checkout').translate('title'), 'Commande')
-  })
-
   it('formats plural messages with interpolation', () => {
     let translator = createTranslator({
       locale: 'fr',

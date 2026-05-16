@@ -13,7 +13,6 @@ export {
   type IntlMessageOptions,
   type IntlPluralMessages,
   type IntlTranslatorOptions,
-  type NamespaceTranslator,
   type Translator as TranslatorValue,
   createLocaleFallbacks,
   createTranslator,

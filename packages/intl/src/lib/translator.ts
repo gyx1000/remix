@@ -28,7 +28,6 @@ export type IntlCatalogs = Record<string, IntlLocaleCatalog | undefined>
 
 export interface IntlMessageOptions {
   scope?: string | readonly string[]
-  namespace?: string
   count?: number
   values?: Record<string, IntlFormatValue | unknown>
   defaultValue?: string
@@ -42,13 +41,6 @@ export interface IntlTranslatorOptions {
   intl?: RemixIntl
 }
 
-export interface NamespaceTranslator {
-  readonly locale: string
-  readonly namespaceName: string
-  t(key: string, options?: Omit<IntlMessageOptions, 'namespace'>): string
-  translate(key: string, options?: Omit<IntlMessageOptions, 'namespace'>): string
-}
-
 export interface Translator {
   readonly locale: string
   readonly defaultLocale: string
@@ -58,7 +50,6 @@ export interface Translator {
   translate(key: string, options?: IntlMessageOptions): string
   l(value: IntlDateTimeValue, options?: Intl.DateTimeFormatOptions): string
   localize(value: IntlDateTimeValue, options?: Intl.DateTimeFormatOptions): string
-  namespace(namespace: string): NamespaceTranslator
 }
 
 export function createLocaleFallbacks(locale: string, defaultLocale: string): string[] {
@@ -114,10 +105,6 @@ class DefaultTranslator implements Translator {
     return this.intl.formatValue(dateTime(value, options))
   }
 
-  namespace(namespace: string): NamespaceTranslator {
-    return new DefaultNamespaceTranslator(this, namespace)
-  }
-
   #findMessage(key: string): IntlMessage | undefined {
     for (let locale of this.fallbackChain) {
       let message = findCatalogMessage(this.#catalogs[locale], key)
@@ -139,27 +126,6 @@ class DefaultTranslator implements Translator {
     }
 
     return interpolate(this.intl, text, options)
-  }
-}
-
-class DefaultNamespaceTranslator implements NamespaceTranslator {
-  readonly locale: string
-  readonly namespaceName: string
-
-  #translator: Translator
-
-  constructor(translator: Translator, namespace: string) {
-    this.#translator = translator
-    this.locale = translator.locale
-    this.namespaceName = namespace
-  }
-
-  t(key: string, options?: Omit<IntlMessageOptions, 'namespace'>): string {
-    return this.#translator.t(key, { ...options, scope: this.namespaceName })
-  }
-
-  translate(key: string, options?: Omit<IntlMessageOptions, 'namespace'>): string {
-    return this.t(key, options)
   }
 }
 
@@ -189,7 +155,7 @@ function appendUnique(values: string[], value: string): void {
 }
 
 function resolveScopedKey(key: string, options: IntlMessageOptions): string {
-  let scope = options.scope ?? options.namespace
+  let scope = options.scope
   if (scope === undefined) return key
 
   let scopes = typeof scope === 'string' ? [scope] : scope

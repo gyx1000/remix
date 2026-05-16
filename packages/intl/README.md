@@ -110,13 +110,13 @@ intl.segment('Hello world', { granularity: 'word' })
 
 ## Scoped Translators
 
-Prefer direct hierarchical keys or `scope`. For compatibility, `namespace()` creates a small translator that prefixes keys with a scope:
+Use direct hierarchical keys or `scope` to resolve messages under a shared prefix:
 
 ```ts
 router.get('/checkout', (context) => {
-  let t = context.get(Translator).namespace('checkout')
+  let t = context.get(Translator)
 
-  return new Response(t.t('pay_now'))
+  return new Response(t.t('pay_now', { scope: 'checkout' }))
 })
 ```
 
