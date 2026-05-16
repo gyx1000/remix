@@ -102,7 +102,7 @@ router.use(
 )
 ```
 
-When `getLocale` returns `null` or `undefined`, the middleware falls back to route params, then `Accept-Language`, then `defaultLocale`.
+When `getLocale` returns `null` or `undefined`, the middleware falls back to `Accept-Language`, then `defaultLocale`.
 
 ## Native Intl facade
 

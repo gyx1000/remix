@@ -49,7 +49,7 @@ describe('intl', () => {
     assert.equal(context.get(Locale), 'fr-CH')
   })
 
-  it('uses route params before Accept-Language when available', async () => {
+  it('ignores route params unless getLocale uses them explicitly', async () => {
     let context = new RequestContext(
       new Request('https://example.com/fr/', {
         headers: { 'Accept-Language': 'en' },
@@ -64,6 +64,6 @@ describe('intl', () => {
 
     await middleware(context, async () => new Response())
 
-    assert.equal(context.get(Locale), 'fr')
+    assert.equal(context.get(Locale), 'en')
   })
 })

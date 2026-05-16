@@ -61,11 +61,6 @@ async function resolveLocale(
     return normalizeSupportedLocale(locale, options)
   }
 
-  let paramLocale = Object.getOwnPropertyDescriptor(context.params, 'locale')?.value
-  if (typeof paramLocale === 'string' && options.supportedLocales.includes(paramLocale)) {
-    return paramLocale
-  }
-
   let acceptLanguage = AcceptLanguage.from(context.headers.get('Accept-Language'))
   return acceptLanguage.getPreferred(options.supportedLocales) ?? options.defaultLocale
 }
