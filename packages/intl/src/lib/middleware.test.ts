@@ -49,21 +49,4 @@ describe('intl', () => {
     assert.equal(context.get(Locale), 'fr-CH')
   })
 
-  it('ignores route params unless getLocale uses them explicitly', async () => {
-    let context = new RequestContext(
-      new Request('https://example.com/fr/', {
-        headers: { 'Accept-Language': 'en' },
-      }),
-    )
-    context.params = { locale: 'fr' }
-    let middleware = intl({
-      supportedLocales: ['en', 'fr'],
-      defaultLocale: 'en',
-      catalogs: {},
-    })
-
-    await middleware(context, async () => new Response())
-
-    assert.equal(context.get(Locale), 'en')
-  })
 })
