@@ -18,7 +18,7 @@ export const catalogs = {
       pay_now: 'Pay now',
     },
     home: {
-      'hero.title': 'Internationalization without global state',
+      'hero.title': 'Request-scoped internationalization',
       'hero.copy':
         'The server negotiates the locale, resolves fallback catalogs, and renders translated HTML for each request.',
       'ssr.copy':
@@ -67,7 +67,7 @@ export const catalogs = {
       pay_now: 'Payer maintenant',
     },
     home: {
-      'hero.title': 'Internationalisation sans état global',
+      'hero.title': 'Internationalisation par requête',
       'hero.copy':
         'Le serveur négocie la locale, résout les catalogues de fallback, et rend le HTML traduit à chaque requête.',
       'ssr.copy':
@@ -133,7 +133,7 @@ export const catalogs = {
       pay_now: 'Paga ora',
     },
     home: {
-      'hero.title': 'Internazionalizzazione senza stato globale',
+      'hero.title': 'Internazionalizzazione per richiesta',
       'hero.copy':
         'Il server negozia la locale, risolve i cataloghi di fallback e renderizza HTML tradotto per ogni richiesta.',
       'ssr.copy':
@@ -184,7 +184,7 @@ export const catalogs = {
       pay_now: 'Jetzt bezahlen',
     },
     home: {
-      'hero.title': 'Internationalisierung ohne globalen Zustand',
+      'hero.title': 'Internationalisierung pro Request',
       'hero.copy':
         'Der Server handelt die Locale aus, löst Fallback-Kataloge auf und rendert übersetztes HTML für jeden Request.',
       'ssr.copy':
