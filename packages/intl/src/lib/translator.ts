@@ -27,7 +27,6 @@ export type IntlLocaleCatalog = IntlMessageCatalog
 export type IntlCatalogs = Record<string, IntlLocaleCatalog | undefined>
 
 export interface IntlMessageOptions {
-  scope?: string | readonly string[]
   count?: number
   values?: Record<string, IntlFormatValue | unknown>
   defaultValue?: string
@@ -41,6 +40,13 @@ export interface IntlTranslatorOptions {
   intl?: RemixIntl
 }
 
+export interface ScopedTranslator {
+  readonly locale: string
+  readonly scopeName: string
+  t(key: string, options?: IntlMessageOptions): string
+  translate(key: string, options?: IntlMessageOptions): string
+}
+
 export interface Translator {
   readonly locale: string
   readonly defaultLocale: string
@@ -50,6 +56,7 @@ export interface Translator {
   translate(key: string, options?: IntlMessageOptions): string
   l(value: IntlDateTimeValue, options?: Intl.DateTimeFormatOptions): string
   localize(value: IntlDateTimeValue, options?: Intl.DateTimeFormatOptions): string
+  scope(scope: string): ScopedTranslator
 }
 
 export function createLocaleFallbacks(locale: string, defaultLocale: string): string[] {
@@ -88,7 +95,7 @@ class DefaultTranslator implements Translator {
   }
 
   t(key: string, options: IntlMessageOptions = {}): string {
-    let message = this.#findMessage(resolveScopedKey(key, options))
+    let message = this.#findMessage(key)
     let fallback = options.defaultValue ?? key
     return this.#format(message, fallback, options)
   }
@@ -103,6 +110,10 @@ class DefaultTranslator implements Translator {
 
   localize(value: IntlDateTimeValue, options?: Intl.DateTimeFormatOptions): string {
     return this.intl.formatValue(dateTime(value, options))
+  }
+
+  scope(scope: string): ScopedTranslator {
+    return new DefaultScopedTranslator(this, scope)
   }
 
   #findMessage(key: string): IntlMessage | undefined {
@@ -126,6 +137,27 @@ class DefaultTranslator implements Translator {
     }
 
     return interpolate(this.intl, text, options)
+  }
+}
+
+class DefaultScopedTranslator implements ScopedTranslator {
+  readonly locale: string
+  readonly scopeName: string
+
+  #translator: Translator
+
+  constructor(translator: Translator, scope: string) {
+    this.#translator = translator
+    this.locale = translator.locale
+    this.scopeName = scope
+  }
+
+  t(key: string, options: IntlMessageOptions = {}): string {
+    return this.#translator.t(resolveScopedKey(this.scopeName, key), options)
+  }
+
+  translate(key: string, options?: IntlMessageOptions): string {
+    return this.t(key, options)
   }
 }
 
@@ -154,12 +186,8 @@ function appendUnique(values: string[], value: string): void {
   if (!values.includes(value)) values.push(value)
 }
 
-function resolveScopedKey(key: string, options: IntlMessageOptions): string {
-  let scope = options.scope
-  if (scope === undefined) return key
-
-  let scopes = typeof scope === 'string' ? [scope] : scope
-  return [...scopes, key].filter((part) => part !== '').join('.')
+function resolveScopedKey(scope: string, key: string): string {
+  return [scope, key].filter((part) => part !== '').join('.')
 }
 
 function findCatalogMessage(

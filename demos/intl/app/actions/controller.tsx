@@ -16,6 +16,8 @@ export default createController(routes, {
       let translator = get(Translator)
       let locale = get(Locale)
       let intl = translator.intl
+      let checkout = translator.scope('checkout')
+      let pluralMessages = translator.scope('home.pluralMessages')
       let intlExamples = getIntlExamples({ intl, locale, translator })
 
       return render(
@@ -89,19 +91,15 @@ export default createController(routes, {
               <dl style={{ display: 'grid', gridTemplateColumns: '120px 1fr', gap: 8 }}>
                 <dt style={{ color: '#52616b' }}>button.save</dt>
                 <dd style={{ margin: 0, fontWeight: 700 }}>{translator.t('button.save')}</dd>
-                <dt style={{ color: '#52616b' }}>scope</dt>
-                <dd style={{ margin: 0, fontWeight: 700 }}>
-                  {translator.t('pay_now', { scope: 'checkout' })}
-                </dd>
+                <dt style={{ color: '#52616b' }}>translator.scope</dt>
+                <dd style={{ margin: 0, fontWeight: 700 }}>{checkout.t('pay_now')}</dd>
               </dl>
             </Panel>
 
             <PluralMessagesCard
               title={translator.t('section.pluralMessages')}
-              description={translator.t('description', { scope: 'home.pluralMessages' })}
-              values={[0, 1, 5].map((count) =>
-                translator.t('value', { scope: 'home.pluralMessages', count }),
-              )}
+              description={pluralMessages.t('description')}
+              values={[0, 1, 5].map((count) => pluralMessages.t('value', { count }))}
             />
 
             <Panel title={translator.t('section.intl')} wide>

@@ -77,13 +77,13 @@ router.get('/checkout', (context) => {
 })
 ```
 
-Use `scope` when route code already provides useful context:
+Use a scoped translator when route code already provides useful context:
 
 ```ts
 router.get('/checkout', (context) => {
-  let t = context.get(Translator)
+  let t = context.get(Translator).scope('checkout')
 
-  return new Response(t.t('pay_now', { scope: 'checkout' }))
+  return new Response(t.t('pay_now'))
 })
 ```
 
@@ -110,13 +110,13 @@ intl.segment('Hello world', { granularity: 'word' })
 
 ## Scoped Translators
 
-Use direct hierarchical keys or `scope` to resolve messages under a shared prefix:
+Use direct hierarchical keys or `translator.scope()` to resolve messages under a shared prefix:
 
 ```ts
 router.get('/checkout', (context) => {
-  let t = context.get(Translator)
+  let t = context.get(Translator).scope('checkout')
 
-  return new Response(t.t('pay_now', { scope: 'checkout' }))
+  return new Response(t.t('pay_now'))
 })
 ```
 

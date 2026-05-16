@@ -12,6 +12,9 @@ const catalogs: IntlCatalogs = {
     checkout: {
       title: 'Checkout',
       pay_now: 'Pay now',
+      actions: {
+        pay_now: 'Pay now',
+      },
     },
     cart: {
       items: {
@@ -35,6 +38,9 @@ const catalogs: IntlCatalogs = {
     checkout: {
       title: 'Commande',
       pay_now: 'Payer maintenant',
+      actions: {
+        pay_now: 'Payer maintenant',
+      },
     },
   },
 }
@@ -72,15 +78,25 @@ describe('createTranslator', () => {
     assert.equal(translator.translate('button.save'), 'Enregistrer')
   })
 
-  it('resolves scoped messages', () => {
+  it('creates scoped translator helpers', () => {
     let translator = createTranslator({
       locale: 'fr-CH',
       defaultLocale: 'en',
       catalogs,
     })
 
-    assert.equal(translator.t('pay_now', { scope: 'checkout' }), 'Payer maintenant')
-    assert.equal(translator.t('items', { scope: ['cart'], count: 3 }), '3 articles')
+    assert.equal(translator.scope('checkout').t('pay_now'), 'Payer maintenant')
+    assert.equal(translator.scope('checkout').translate('title'), 'Commande')
+  })
+
+  it('passes message options through scoped translator helpers', () => {
+    let translator = createTranslator({
+      locale: 'fr-CH',
+      defaultLocale: 'en',
+      catalogs,
+    })
+
+    assert.equal(translator.scope('cart').t('items', { count: 3 }), '3 articles')
   })
 
   it('formats plural messages with interpolation', () => {

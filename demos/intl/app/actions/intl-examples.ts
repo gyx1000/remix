@@ -16,12 +16,13 @@ export function getIntlExamples({
   translator: TranslatorValue
 }): IntlExample[] {
   let collator = intl.collator()
+  let messages = translator.scope('home.intl')
 
   return [
     {
       name: 'Intl.NumberFormat',
       value: intl.formatNumber(1234.5, { style: 'currency', currency: 'CHF' }),
-      description: translator.t('numberFormat.description', { scope: 'home.intl' }),
+      description: messages.t('numberFormat.description'),
     },
     {
       name: 'Intl.DateTimeFormat',
@@ -30,17 +31,17 @@ export function getIntlExamples({
         dateStyle: 'medium',
         timeStyle: 'short',
       }),
-      description: translator.t('dateTimeFormat.description', { scope: 'home.intl' }),
+      description: messages.t('dateTimeFormat.description'),
     },
     {
       name: 'Intl.RelativeTimeFormat',
       value: intl.formatRelativeTime(-1, 'day', { numeric: 'auto' }),
-      description: translator.t('relativeTimeFormat.description', { scope: 'home.intl' }),
+      description: messages.t('relativeTimeFormat.description'),
     },
     {
       name: 'Intl.ListFormat',
       value: intl.formatList(['Remix', 'React', 'Vite']),
-      description: translator.t('listFormat.description', { scope: 'home.intl' }),
+      description: messages.t('listFormat.description'),
     },
     {
       name: 'Intl.DisplayNames',
@@ -50,17 +51,17 @@ export function getIntlExamples({
         `Currency: ${intl.formatDisplayName('CHF', { type: 'currency' })}`,
         `Calendar: ${intl.formatDisplayName('gregory', { type: 'calendar' })}`,
       ].join('\n'),
-      description: translator.t('displayNames.description', { scope: 'home.intl' }),
+      description: messages.t('displayNames.description'),
     },
     {
       name: 'Intl.PluralRules',
       value: `2 → ${intl.selectPlural(2)}`,
-      description: translator.t('pluralRules.description', { scope: 'home.intl' }),
+      description: messages.t('pluralRules.description'),
     },
     {
       name: 'Intl.Collator',
       value: ['zebra', 'éclair', 'avion'].sort(collator.compare).join(', '),
-      description: translator.t('collator.description', { scope: 'home.intl' }),
+      description: messages.t('collator.description'),
     },
     {
       name: 'Intl.Segmenter',
@@ -68,27 +69,27 @@ export function getIntlExamples({
         .filter((segment) => segment.isWordLike)
         .map((segment) => segment.segment)
         .join(' · '),
-      description: translator.t('segmenter.description', { scope: 'home.intl' }),
+      description: messages.t('segmenter.description'),
     },
     {
       name: 'Intl.Locale',
       value: `${intl.localeObject.language}${intl.localeObject.region ? `-${intl.localeObject.region}` : ''}`,
-      description: translator.t('locale.description', { scope: 'home.intl' }),
+      description: messages.t('locale.description'),
     },
     {
       name: 'Intl.DurationFormat',
       value: formatDuration(locale),
-      description: translator.t('durationFormat.description', { scope: 'home.intl' }),
+      description: messages.t('durationFormat.description'),
     },
     {
       name: 'Intl.getCanonicalLocales',
       value: Intl.getCanonicalLocales(['FR-ch', 'en-us']).join(', '),
-      description: translator.t('getCanonicalLocales.description', { scope: 'home.intl' }),
+      description: messages.t('getCanonicalLocales.description'),
     },
     {
       name: 'Intl.supportedValuesOf',
       value: supportedValuesSample('calendar'),
-      description: translator.t('supportedValuesOf.description', { scope: 'home.intl' }),
+      description: messages.t('supportedValuesOf.description'),
     },
   ]
 }
