@@ -8,6 +8,8 @@ export {
 } from './lib/middleware.ts'
 export {
   type IntlCatalogs,
+  type IntlMessageFunction,
+  type IntlMessageFunctionInput,
   type IntlMessageCatalog,
   type IntlMessage,
   type IntlMessageOptions,

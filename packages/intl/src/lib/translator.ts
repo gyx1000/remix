@@ -10,7 +10,16 @@ export type IntlPluralMessages = Partial<Record<Intl.LDMLPluralRule, string>> & 
   other: string
 }
 
-export type IntlMessage = string | IntlPluralMessages
+export interface IntlMessageFunctionInput {
+  count?: number
+  values: Record<string, IntlFormatValue | unknown>
+}
+
+export interface IntlMessageFunction {
+  (input: IntlMessageFunctionInput): string
+}
+
+export type IntlMessage = string | IntlPluralMessages | IntlMessageFunction
 
 export interface IntlMessageCatalog {
   [key: string]: IntlMessage | IntlMessageCatalog | undefined
@@ -127,6 +136,11 @@ class DefaultTranslator implements Translator {
 
     if (typeof message === 'string') {
       text = message
+    } else if (typeof message === 'function') {
+      return message({
+        count: options.count,
+        values: options.values ?? {},
+      })
     } else if (message !== undefined) {
       let category = this.intl.selectPlural(options.count ?? 0)
       text =
@@ -212,7 +226,7 @@ function findCatalogMessage(
 }
 
 function isIntlMessage(value: IntlMessage | IntlMessageCatalog | undefined): value is IntlMessage {
-  return typeof value === 'string' || isIntlPluralMessages(value)
+  return typeof value === 'string' || typeof value === 'function' || isIntlPluralMessages(value)
 }
 
 function isIntlPluralMessages(
