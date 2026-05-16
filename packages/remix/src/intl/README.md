@@ -6,6 +6,7 @@ Composable Intl primitives for Remix applications. `intl` provides request-scope
 
 - Request-scoped `Locale` and `Translator` context keys for backend code
 - `t()`/`translate()` message lookup with interpolation and plural messages
+- Function messages for dynamic translations that need custom logic
 - `l()`/`localize()` date-time localization
 - Wrappers for `Intl.NumberFormat`, `Intl.DateTimeFormat`, `Intl.RelativeTimeFormat`, `Intl.ListFormat`, `Intl.DisplayNames`, `Intl.PluralRules`, `Intl.Collator`, and `Intl.Segmenter`
 - Tagged interpolation values like `number()`, `dateTime()`, `relativeTime()`, `list()`, and `displayName()`
@@ -161,6 +162,22 @@ intl({
   },
 })
 ```
+
+## Function Messages
+
+Catalog messages can also be functions when a translation needs custom logic that does not fit a static string or plural message.
+
+```ts
+let catalogs = {
+  en: {
+    greeting({ values }) {
+      return values.title === 'mrs' ? `Hello Mrs. ${values.name}` : `Hello Mr. ${values.name}`
+    },
+  },
+}
+```
+
+Message functions receive only `count` and `values`, and return the final string.
 
 ## Localizing dates
 

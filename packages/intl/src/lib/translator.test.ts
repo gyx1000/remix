@@ -22,6 +22,9 @@ const catalogs: IntlCatalogs = {
         other: '%{count} items',
       },
     },
+    greeting({ values }) {
+      return values.title === 'mrs' ? `Hello Mrs. ${values.name}` : `Hello Mr. ${values.name}`
+    },
   },
   fr: {
     button: {
@@ -109,6 +112,24 @@ describe('createTranslator', () => {
 
     assert.equal(translator.t('cart.items', { count: 1 }), '1 article')
     assert.equal(translator.t('cart.items', { count: 3 }), '3 articles')
+  })
+
+  it('resolves function messages with values', () => {
+    let translator = createTranslator({
+      locale: 'en',
+      defaultLocale: 'en',
+      catalogs,
+    })
+
+    assert.equal(
+      translator.t('greeting', {
+        values: {
+          title: 'mrs',
+          name: 'Ada',
+        },
+      }),
+      'Hello Mrs. Ada',
+    )
   })
 
   it('prefers explicit zero messages when count is zero', () => {
