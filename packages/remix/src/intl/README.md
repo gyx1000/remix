@@ -173,9 +173,6 @@ let catalogs = {
     greeting({ values }) {
       return values.title === 'mrs' ? `Hello Mrs. ${values.name}` : `Hello Mr. ${values.name}`
     },
-    inbox({ count }) {
-      return count === 1 ? 'You have one message' : `You have ${count ?? 0} messages`
-    },
   },
 }
 ```

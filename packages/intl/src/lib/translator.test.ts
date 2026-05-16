@@ -114,7 +114,7 @@ describe('createTranslator', () => {
     assert.equal(translator.t('cart.items', { count: 3 }), '3 articles')
   })
 
-  it('resolves function messages with count and values', () => {
+  it('resolves function messages with values', () => {
     let translator = createTranslator({
       locale: 'en',
       defaultLocale: 'en',
@@ -130,23 +130,6 @@ describe('createTranslator', () => {
       }),
       'Hello Mrs. Ada',
     )
-  })
-
-  it('passes counts to function messages', () => {
-    let translator = createTranslator({
-      locale: 'en',
-      defaultLocale: 'en',
-      catalogs: {
-        en: {
-          inbox({ count }) {
-            return count === 1 ? 'You have one message' : `You have ${count ?? 0} messages`
-          },
-        },
-      },
-    })
-
-    assert.equal(translator.t('inbox', { count: 1 }), 'You have one message')
-    assert.equal(translator.t('inbox', { count: 3 }), 'You have 3 messages')
   })
 
   it('prefers explicit zero messages when count is zero', () => {
