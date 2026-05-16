@@ -87,6 +87,23 @@ router.get('/checkout', (context) => {
 })
 ```
 
+Override locale resolution with `getLocale` when your app stores locale preference somewhere more specific than the URL or `Accept-Language` header:
+
+```ts
+router.use(
+  intl({
+    supportedLocales: ['en', 'fr', 'fr-CH'],
+    defaultLocale: 'en',
+    catalogs,
+    getLocale(context) {
+      return context.request.headers.get('X-Locale')
+    },
+  }),
+)
+```
+
+When `getLocale` returns `null` or `undefined`, the middleware falls back to route params, then `Accept-Language`, then `defaultLocale`.
+
 ## Native Intl facade
 
 Use `createIntl()` when you only need formatting primitives:
