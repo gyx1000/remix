@@ -191,10 +191,6 @@ router.get('/today', (context) => {
 })
 ```
 
-## Changing Locales
-
-Prefer a full document reload when the user changes language. Let the server update the locale cookie or URL segment, redirect to the current page, rerun SSR, and send fresh translated HTML.
-
 ## Related Packages
 
 - [`fetch-router`](https://github.com/remix-run/remix/tree/main/packages/fetch-router) provides request context and middleware.
