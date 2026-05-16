@@ -60,7 +60,10 @@ export function createIntl(locales: IntlLocale, options: RemixIntlOptions = {}):
   return new DefaultRemixIntl(locales, options)
 }
 
-export function number(value: number | bigint, options?: Intl.NumberFormatOptions): IntlFormatValue {
+export function number(
+  value: number | bigint,
+  options?: Intl.NumberFormatOptions,
+): IntlFormatValue {
   return { type: 'number', value, options }
 }
 
@@ -97,9 +100,12 @@ class DefaultRemixIntl implements RemixIntl {
   constructor(locales: IntlLocale, options: RemixIntlOptions) {
     this.locales = Array.isArray(locales) ? [...locales] : [locales]
     this.#localeMatcher = options.localeMatcher
-    this.locale = Intl.NumberFormat.supportedLocalesOf(this.locales, {
-      localeMatcher: options.localeMatcher,
-    })[0] ?? this.locales[0] ?? 'en'
+    this.locale =
+      Intl.NumberFormat.supportedLocalesOf(this.locales, {
+        localeMatcher: options.localeMatcher,
+      })[0] ??
+      this.locales[0] ??
+      'en'
     this.localeObject = new Intl.Locale(this.locale)
   }
 

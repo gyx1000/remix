@@ -27,11 +27,7 @@ export default createController(routes, {
           languageLabel={translator.t('language.label')}
           languageSubmit={translator.t('language.submit')}
         >
-          <section
-            className="intl-hero"
-            style={{
-            }}
-          >
+          <section className="intl-hero">
             <div>
               <p style={{ margin: '0 0 10px', color: '#52616b', fontWeight: 700 }}>
                 {translator.t('nav.home')}
@@ -60,11 +56,7 @@ export default createController(routes, {
             </div>
           </section>
 
-          <div
-            className="intl-content-grid"
-            style={{
-            }}
-          >
+          <div className="intl-content-grid">
             <Panel title={translator.t('section.ssr')}>
               <p style={{ color: '#52616b', lineHeight: 1.5 }}>{translator.t('home.ssr.copy')}</p>
               <dl className="intl-definition-list">
@@ -97,11 +89,7 @@ export default createController(routes, {
 
             <Panel title={translator.t('section.intl')} wide>
               <p style={{ color: '#52616b', lineHeight: 1.5 }}>{translator.t('home.intl.copy')}</p>
-              <div
-                className="intl-examples-grid"
-                style={{
-                }}
-              >
+              <div className="intl-examples-grid">
                 {intlExamples.map((example) => (
                   <IntlExampleCard example={example} />
                 ))}

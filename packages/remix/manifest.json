@@ -25,6 +25,7 @@
   "remix/fs": "@remix-run/fs",
   "remix/headers": "@remix-run/headers",
   "remix/html-template": "@remix-run/html-template",
+  "remix/intl": "@remix-run/intl",
   "remix/lazy-file": "@remix-run/lazy-file",
   "remix/middleware/async-context": "@remix-run/async-context-middleware",
   "remix/middleware/auth": "@remix-run/auth-middleware",

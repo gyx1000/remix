@@ -48,5 +48,4 @@ describe('intl', () => {
 
     assert.equal(context.get(Locale), 'fr-CH')
   })
-
 })
