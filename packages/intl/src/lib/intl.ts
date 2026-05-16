@@ -93,14 +93,6 @@ class DefaultRemixIntl implements RemixIntl {
   readonly localeObject: Intl.Locale
 
   #localeMatcher?: IntlLocaleMatcher
-  #numberFormatters = new Map<string, Intl.NumberFormat>()
-  #dateTimeFormatters = new Map<string, Intl.DateTimeFormat>()
-  #relativeTimeFormatters = new Map<string, Intl.RelativeTimeFormat>()
-  #listFormatters = new Map<string, Intl.ListFormat>()
-  #displayNames = new Map<string, Intl.DisplayNames>()
-  #pluralRules = new Map<string, Intl.PluralRules>()
-  #collators = new Map<string, Intl.Collator>()
-  #segmenters = new Map<string, Intl.Segmenter>()
 
   constructor(locales: IntlLocale, options: RemixIntlOptions) {
     this.locales = Array.isArray(locales) ? [...locales] : [locales]
@@ -112,51 +104,35 @@ class DefaultRemixIntl implements RemixIntl {
   }
 
   number(options?: Intl.NumberFormatOptions): Intl.NumberFormat {
-    return getCached(this.#numberFormatters, cacheKey(options), () =>
-      new Intl.NumberFormat(this.locales, this.#withLocaleMatcher(options)),
-    )
+    return new Intl.NumberFormat(this.locales, this.#withLocaleMatcher(options))
   }
 
   dateTime(options?: Intl.DateTimeFormatOptions): Intl.DateTimeFormat {
-    return getCached(this.#dateTimeFormatters, cacheKey(options), () =>
-      new Intl.DateTimeFormat(this.locales, this.#withLocaleMatcher(options)),
-    )
+    return new Intl.DateTimeFormat(this.locales, this.#withLocaleMatcher(options))
   }
 
   relativeTime(options?: Intl.RelativeTimeFormatOptions): Intl.RelativeTimeFormat {
-    return getCached(this.#relativeTimeFormatters, cacheKey(options), () =>
-      new Intl.RelativeTimeFormat(this.locales, this.#withLocaleMatcher(options)),
-    )
+    return new Intl.RelativeTimeFormat(this.locales, this.#withLocaleMatcher(options))
   }
 
   list(options?: Intl.ListFormatOptions): Intl.ListFormat {
-    return getCached(this.#listFormatters, cacheKey(options), () =>
-      new Intl.ListFormat(this.locales, this.#withLocaleMatcher(options)),
-    )
+    return new Intl.ListFormat(this.locales, this.#withLocaleMatcher(options))
   }
 
   displayNames(options: Intl.DisplayNamesOptions): Intl.DisplayNames {
-    return getCached(this.#displayNames, cacheKey(options), () =>
-      new Intl.DisplayNames(this.locales, this.#withLocaleMatcher(options)),
-    )
+    return new Intl.DisplayNames(this.locales, this.#withLocaleMatcher(options))
   }
 
   pluralRules(options?: Intl.PluralRulesOptions): Intl.PluralRules {
-    return getCached(this.#pluralRules, cacheKey(options), () =>
-      new Intl.PluralRules(this.locales, this.#withLocaleMatcher(options)),
-    )
+    return new Intl.PluralRules(this.locales, this.#withLocaleMatcher(options))
   }
 
   collator(options?: Intl.CollatorOptions): Intl.Collator {
-    return getCached(this.#collators, cacheKey(options), () =>
-      new Intl.Collator(this.locales, this.#withLocaleMatcher(options)),
-    )
+    return new Intl.Collator(this.locales, this.#withLocaleMatcher(options))
   }
 
   segmenter(options?: Intl.SegmenterOptions): Intl.Segmenter {
-    return getCached(this.#segmenters, cacheKey(options), () =>
-      new Intl.Segmenter(this.locales, options),
-    )
+    return new Intl.Segmenter(this.locales, options)
   }
 
   formatNumber(value: number | bigint, options?: Intl.NumberFormatOptions): string {
@@ -226,19 +202,5 @@ function isIntlFormatValue(value: unknown): value is IntlFormatValue {
 
 function toDateTimeValue(value: IntlDateTimeValue): Date | number {
   if (typeof value === 'string') return new Date(value)
-  return value
-}
-
-function cacheKey(options: object | undefined): string {
-  if (options === undefined) return ''
-  return JSON.stringify(Object.entries(options).sort(([left], [right]) => left.localeCompare(right)))
-}
-
-function getCached<T>(cache: Map<string, T>, key: string, create: () => T): T {
-  let value = cache.get(key)
-  if (value === undefined) {
-    value = create()
-    cache.set(key, value)
-  }
   return value
 }

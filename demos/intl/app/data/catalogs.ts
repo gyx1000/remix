@@ -27,7 +27,7 @@ export const catalogs = {
       'scopes.copy':
         'Route code can use direct hierarchical keys or scoped translators while all translation lookup stays on the server.',
       'intl.copy':
-        'The request-scoped translator also exposes cached native Intl primitives for formatting, sorting, segmenting, and inspecting locale data.',
+        'The request-scoped translator also exposes native Intl primitives for formatting, sorting, segmenting, and inspecting locale data.',
       'intl.numberFormat.description': 'Currency and number formatting',
       'intl.dateTimeFormat.description': 'Date, time, calendar, and timezone formatting',
       'intl.relativeTimeFormat.description': 'Human relative time',
@@ -76,7 +76,7 @@ export const catalogs = {
       'scopes.copy':
         'Le code des routes peut utiliser des clés hiérarchiques directes ou des translators scopés pendant que toute la traduction reste côté serveur.',
       'intl.copy':
-        'Le traducteur de la requête expose aussi des primitives Intl natives mises en cache pour formater, trier, segmenter et inspecter les données de locale.',
+        'Le traducteur de la requête expose aussi des primitives Intl natives pour formater, trier, segmenter et inspecter les données de locale.',
       'intl.numberFormat.description': 'Formatage des devises et des nombres',
       'intl.dateTimeFormat.description':
         'Formatage des dates, heures, calendriers et fuseaux horaires',
@@ -142,7 +142,7 @@ export const catalogs = {
       'scopes.copy':
         'Il codice delle route può usare chiavi gerarchiche dirette o translator con scope mentre tutta la risoluzione delle traduzioni resta sul server.',
       'intl.copy':
-        'Il traduttore della richiesta espone anche primitive Intl native in cache per formattare, ordinare, segmentare e ispezionare i dati della locale.',
+        'Il traduttore della richiesta espone anche primitive Intl native per formattare, ordinare, segmentare e ispezionare i dati della locale.',
       'intl.numberFormat.description': 'Formattazione di valute e numeri',
       'intl.dateTimeFormat.description': 'Formattazione di date, orari, calendari e fusi orari',
       'intl.relativeTimeFormat.description': 'Tempo relativo leggibile',
