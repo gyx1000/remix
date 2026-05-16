@@ -6,13 +6,7 @@ import {
   type RemixIntl,
 } from './intl.ts'
 
-export interface IntlPluralMessages {
-  [key: string]: string | undefined
-  zero?: string
-  one?: string
-  two?: string
-  few?: string
-  many?: string
+export type IntlPluralMessages = Partial<Record<Intl.LDMLPluralRule, string>> & {
   other: string
 }
 
@@ -205,7 +199,7 @@ function findCatalogMessage(
   let segments = key.split('.')
 
   for (let index = 0; index < segments.length; index++) {
-    if (!isMessageCatalog(current)) return undefined
+    if (!isMessageCatalog(current) || isIntlPluralMessages(current)) return undefined
 
     let remainingKey = segments.slice(index).join('.')
     let direct = current[remainingKey]
