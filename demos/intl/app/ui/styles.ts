@@ -210,19 +210,24 @@ export const compactCopy = css({
 
 export const definitionList = css({
   display: 'grid',
-  gap: 8,
-  gridTemplateColumns: '120px 1fr',
+  rowGap: 8,
+  columnGap: 16,
+  gridTemplateColumns: 'minmax(190px, max-content) minmax(0, 1fr)',
+  margin: '16px 0 0',
   '@media (max-width: 430px)': {
     gridTemplateColumns: '1fr',
   },
 })
 
 export const definitionTerm = css({
+  minWidth: 0,
   color: colors.textMuted,
+  overflowWrap: 'anywhere',
 })
 
 export const definitionValue = css({
   margin: 0,
+  minWidth: 0,
   fontWeight: 700,
   overflowWrap: 'anywhere',
 })
