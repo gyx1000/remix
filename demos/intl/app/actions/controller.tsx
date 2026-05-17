@@ -60,11 +60,13 @@ export default createController(routes, {
             <Panel title={translator.t('section.ssr')}>
               <p style={{ color: '#52616b', lineHeight: 1.5 }}>{translator.t('home.ssr.copy')}</p>
               <dl className="intl-definition-list">
-                <dt style={{ color: '#52616b' }}>{translator.t('button.save')}</dt>
-                <dd style={{ margin: 0, fontWeight: 700 }}>{translator.t('button.save')}</dd>
-                <dt style={{ color: '#52616b' }}>Checkout</dt>
+                <dt style={{ color: '#52616b' }}>home.checkout.title</dt>
                 <dd style={{ margin: 0, fontWeight: 700 }}>
-                  {translator.t('home.checkout.label')}
+                  {translator.t('home.checkout.title')}
+                </dd>
+                <dt style={{ color: '#52616b' }}>account.settings.save</dt>
+                <dd style={{ margin: 0, fontWeight: 700 }}>
+                  {translator.t('account.settings.save')}
                 </dd>
               </dl>
             </Panel>
@@ -74,10 +76,12 @@ export default createController(routes, {
                 {translator.t('home.scopes.copy')}
               </p>
               <dl className="intl-definition-list">
-                <dt style={{ color: '#52616b' }}>button.save</dt>
-                <dd style={{ margin: 0, fontWeight: 700 }}>{translator.t('button.save')}</dd>
-                <dt style={{ color: '#52616b' }}>translator.scope</dt>
-                <dd style={{ margin: 0, fontWeight: 700 }}>{checkout.t('pay_now')}</dd>
+                <dt style={{ color: '#52616b' }}>checkout.actions.confirm</dt>
+                <dd style={{ margin: 0, fontWeight: 700 }}>
+                  {checkout.t('actions.confirm')}
+                </dd>
+                <dt style={{ color: '#52616b' }}>checkout.summary.total</dt>
+                <dd style={{ margin: 0, fontWeight: 700 }}>{checkout.t('summary.total')}</dd>
               </dl>
             </Panel>
 

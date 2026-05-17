@@ -14,18 +14,26 @@ export const catalogs = {
     'badge.locale': 'Active locale',
     'badge.fallbacks': 'Fallback chain',
     'button.save': 'Save',
+    'account.settings.save': 'Save account settings',
     checkout: {
+      actions: {
+        confirm: 'Confirm order',
+      },
       pay_now: 'Pay now',
+      summary: {
+        total: 'Total due',
+      },
     },
     home: {
       'hero.title': 'Request-scoped internationalization',
       'hero.copy':
         'The server negotiates the locale, resolves fallback catalogs, and renders translated HTML for each request.',
       'ssr.copy':
-        'This card is rendered entirely on the server. Switch to Swiss French to see "Checkout" come from fr-CH while "Save" falls back to fr.',
+        'Rendered on the server with locale fallback. In Swiss French, checkout uses fr-CH while account settings fall back to fr.',
       'checkout.label': 'Checkout',
+      'checkout.title': 'Checkout',
       'scopes.copy':
-        'Route code can use direct hierarchical keys or scoped translators while all translation lookup stays on the server.',
+        'Use route-local scopes to keep translation keys short while lookup and fallback stay server-side.',
       'intl.copy':
         'The request-scoped translator also exposes native Intl primitives for formatting, sorting, segmenting, and inspecting locale data.',
       'intl.numberFormat.description': 'Currency and number formatting',
@@ -63,18 +71,26 @@ export const catalogs = {
     'badge.locale': 'Locale active',
     'badge.fallbacks': 'Chaîne de fallback',
     'button.save': 'Enregistrer',
+    'account.settings.save': 'Enregistrer les paramètres du compte',
     checkout: {
+      actions: {
+        confirm: 'Confirmer la commande',
+      },
       pay_now: 'Payer maintenant',
+      summary: {
+        total: 'Total à payer',
+      },
     },
     home: {
       'hero.title': 'Internationalisation par requête',
       'hero.copy':
         'Le serveur négocie la locale, résout les catalogues de fallback, et rend le HTML traduit à chaque requête.',
       'ssr.copy':
-        'Cette carte est entièrement rendue côté serveur. Passez en français suisse pour voir "Checkout" venir de fr-CH pendant que "Save" retombe sur fr.',
+        'Rendu côté serveur avec fallback de locale. En français suisse, le paiement utilise fr-CH pendant que les paramètres du compte retombent sur fr.',
       'checkout.label': 'Paiement',
+      'checkout.title': 'Paiement',
       'scopes.copy':
-        'Le code des routes peut utiliser des clés hiérarchiques directes ou des translators scopés pendant que toute la traduction reste côté serveur.',
+        'Utilisez des scopes locaux à la route pour garder des clés courtes pendant que la résolution et le fallback restent côté serveur.',
       'intl.copy':
         'Le traducteur de la requête expose aussi des primitives Intl natives pour formater, trier, segmenter et inspecter les données de locale.',
       'intl.numberFormat.description': 'Formatage des devises et des nombres',
@@ -104,10 +120,17 @@ export const catalogs = {
   'fr-CH': {
     'language.submit': 'Recharger la page',
     checkout: {
+      actions: {
+        confirm: 'Confirmer la commande',
+      },
       pay_now: 'Payer maintenant',
+      summary: {
+        total: 'Montant à payer',
+      },
     },
     home: {
       'checkout.label': 'Commande',
+      'checkout.title': 'Commande',
       'pluralMessages.description': 'Le traducteur choisit le bon message selon le nombre.',
       'pluralMessages.value': {
         zero: 'Aucun message non lu',
@@ -129,18 +152,26 @@ export const catalogs = {
     'badge.locale': 'Locale attiva',
     'badge.fallbacks': 'Catena di fallback',
     'button.save': 'Salva',
+    'account.settings.save': "Salva le impostazioni dell'account",
     checkout: {
+      actions: {
+        confirm: "Conferma l'ordine",
+      },
       pay_now: 'Paga ora',
+      summary: {
+        total: 'Totale da pagare',
+      },
     },
     home: {
       'hero.title': 'Internazionalizzazione per richiesta',
       'hero.copy':
         'Il server negozia la locale, risolve i cataloghi di fallback e renderizza HTML tradotto per ogni richiesta.',
       'ssr.copy':
-        'Questa scheda viene renderizzata interamente sul server. Passa al francese svizzero per vedere "Checkout" arrivare da fr-CH mentre "Save" ricade su fr.',
+        "Rendering sul server con fallback di locale. In francese svizzero, il checkout usa fr-CH mentre le impostazioni dell'account ricadono su fr.",
       'checkout.label': 'Pagamento',
+      'checkout.title': 'Pagamento',
       'scopes.copy':
-        'Il codice delle route può usare chiavi gerarchiche dirette o translator con scope mentre tutta la risoluzione delle traduzioni resta sul server.',
+        'Usa scope locali alla route per mantenere brevi le chiavi mentre risoluzione e fallback restano sul server.',
       'intl.copy':
         'Il traduttore della richiesta espone anche primitive Intl native per formattare, ordinare, segmentare e ispezionare i dati della locale.',
       'intl.numberFormat.description': 'Formattazione di valute e numeri',
@@ -180,18 +211,26 @@ export const catalogs = {
     'badge.locale': 'Aktive Locale',
     'badge.fallbacks': 'Fallback-Kette',
     'button.save': 'Speichern',
+    'account.settings.save': 'Kontoeinstellungen speichern',
     checkout: {
+      actions: {
+        confirm: 'Bestellung bestätigen',
+      },
       pay_now: 'Jetzt bezahlen',
+      summary: {
+        total: 'Zu zahlender Gesamtbetrag',
+      },
     },
     home: {
       'hero.title': 'Internationalisierung pro Request',
       'hero.copy':
         'Der Server handelt die Locale aus, löst Fallback-Kataloge auf und rendert übersetztes HTML für jeden Request.',
       'ssr.copy':
-        'Diese Karte wird vollständig auf dem Server gerendert. Wechsle zu Schweizer Französisch, um zu sehen, wie "Checkout" aus fr-CH kommt, während "Save" auf fr zurückfällt.',
+        'Serverseitig gerendert mit Locale-Fallback. In Schweizer Französisch verwendet Checkout fr-CH, während Kontoeinstellungen auf fr zurückfallen.',
       'checkout.label': 'Kasse',
+      'checkout.title': 'Kasse',
       'scopes.copy':
-        'Route-Code kann direkte hierarchische Schlüssel oder scoped Translator verwenden, während die gesamte Übersetzungsauflösung auf dem Server bleibt.',
+        'Verwende route-lokale Scopes, um Übersetzungsschlüssel kurz zu halten, während Auflösung und Fallback serverseitig bleiben.',
       'intl.copy':
         'Der Request-Übersetzer stellt auch gecachte native Intl-Primitive zum Formatieren, Sortieren, Segmentieren und Prüfen von Locale-Daten bereit.',
       'intl.numberFormat.description': 'Währungs- und Zahlenformatierung',
