@@ -1,5 +1,7 @@
 import type { Handle, RemixNode } from 'remix/ui'
 
+import * as styles from './styles.ts'
+
 type PanelProps = {
   title: string
   wide?: boolean
@@ -8,17 +10,8 @@ type PanelProps = {
 
 export function Panel(handle: Handle<PanelProps>) {
   return () => (
-    <section
-      style={{
-        border: '1px solid #d8d4c8',
-        borderRadius: 8,
-        background: '#fff',
-        padding: 18,
-        minHeight: 160,
-        gridColumn: handle.props.wide ? '1 / -1' : undefined,
-      }}
-    >
-      <h2 style={{ margin: '0 0 12px', fontSize: 18 }}>{handle.props.title}</h2>
+    <section mix={handle.props.wide ? [styles.panel, styles.panelWide] : styles.panel}>
+      <h2 mix={styles.panelTitle}>{handle.props.title}</h2>
       {handle.props.children}
     </section>
   )
