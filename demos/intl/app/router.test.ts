@@ -36,7 +36,7 @@ describe('intl router', () => {
     assert.equal(response.status, 200)
 
     let html = await response.text()
-    assert.ok(html.includes('fr -&gt; en'))
+    assert.ok(html.includes('fr-CA -&gt; fr -&gt; en'))
     assert.ok(html.includes('Internationalisation par requête'))
     assert.ok(html.includes('Paiement'))
     assert.ok(html.includes('Enregistrer les paramètres du compte'))

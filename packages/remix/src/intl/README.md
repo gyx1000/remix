@@ -61,7 +61,6 @@ let catalogs = {
 
 router.use(
   intl({
-    supportedLocales: ['en', 'fr', 'fr-CH'],
     defaultLocale: 'en',
     catalogs,
   }),
@@ -93,7 +92,6 @@ Override locale resolution with `getLocale` when your app stores locale preferen
 ```ts
 router.use(
   intl({
-    supportedLocales: ['en', 'fr', 'fr-CH'],
     defaultLocale: 'en',
     catalogs,
     getLocale(context) {
@@ -103,7 +101,9 @@ router.use(
 )
 ```
 
-When `getLocale` returns `null` or `undefined`, the middleware falls back to `Accept-Language`, then `defaultLocale`.
+When `getLocale` returns `null` or `undefined`, the middleware falls back to `Accept-Language`, then `defaultLocale`. `Accept-Language` negotiation uses the available catalog locales.
+
+The resolved request locale is preserved for the native Intl facade. For example, a `fr-CA` request can still format numbers and dates with `fr-CA` while app messages fall back through `fr` and `en`.
 
 ## Native Intl facade
 
@@ -149,19 +149,7 @@ createLocaleFallbacks('fr-CH', 'en')
 // ['fr-CH', 'fr', 'en']
 ```
 
-You can customize fallbacks:
-
-```ts
-intl({
-  supportedLocales: ['en', 'fr', 'fr-CH'],
-  defaultLocale: 'en',
-  catalogs,
-  fallbackLocales(locale) {
-    if (locale === 'fr-CH') return ['fr', 'en']
-    return ['en']
-  },
-})
-```
+The translator uses this chain for both message lookup and native Intl formatting.
 
 ## Function Messages
 
