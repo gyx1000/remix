@@ -3,7 +3,7 @@ import { Locale, Translator } from 'remix/intl'
 import { Renderer } from 'remix/render-middleware'
 import type { Handle } from 'remix/ui'
 
-import { localeNames } from '../data/intl.ts'
+import { localeOptions } from '../data/intl.ts'
 import { routes } from '../routes.ts'
 import { Document } from '../ui/document.tsx'
 import { Panel } from '../ui/panel.tsx'
@@ -20,6 +20,7 @@ export default createController(routes, {
       let checkout = translator.scope('checkout')
       let pluralMessages = translator.scope('home.pluralMessages')
       let intlExamples = getIntlExamples({ intl, locale, translator })
+      let localeName = localeOptions.find((option) => option.locale === locale)?.name ?? locale
 
       return render(
         <Document
@@ -36,7 +37,7 @@ export default createController(routes, {
             </div>
 
             <div mix={styles.metadataPanel}>
-              <MetadataRow label={translator.t('badge.locale')} value={localeNames[locale]} />
+              <MetadataRow label={translator.t('badge.locale')} value={localeName} />
               <MetadataRow
                 label={translator.t('badge.fallbacks')}
                 value={translator.fallbackChain.join(' -> ')}
