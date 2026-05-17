@@ -1,5 +1,4 @@
 export {
-  type IntlFallbackLocaleResolver,
   type IntlLocaleResolver,
   type IntlMiddlewareOptions,
   Locale,

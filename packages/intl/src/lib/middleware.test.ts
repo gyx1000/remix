@@ -12,7 +12,6 @@ describe('intl', () => {
       }),
     )
     let middleware = intl({
-      supportedLocales: ['en', 'fr'],
       defaultLocale: 'en',
       catalogs: {
         fr: {
@@ -32,20 +31,58 @@ describe('intl', () => {
     assert.equal(context.get(Translator)?.t('button.save'), 'Enregistrer')
   })
 
-  it('falls back to Accept-Language negotiation', async () => {
-    let context = new RequestContext(
-      new Request('https://example.com/', {
-        headers: { 'Accept-Language': 'de, fr-CH;q=0.9, en;q=0.5' },
-      }),
-    )
+  it('preserves a resolved regional locale', async () => {
+    let context = new RequestContext(new Request('https://example.com/'))
     let middleware = intl({
-      supportedLocales: ['en', 'fr-CH'],
       defaultLocale: 'en',
-      catalogs: {},
+      catalogs: {
+        en: {},
+        fr: {},
+      },
+      getLocale() {
+        return 'fr-CA'
+      },
     })
 
     await middleware(context, async () => new Response())
 
-    assert.equal(context.get(Locale), 'fr-CH')
+    let translator = context.get(Translator)
+    assert.equal(context.get(Locale), 'fr-CA')
+    assert.equal(translator?.locale, 'fr-CA')
+    assert.equal(translator?.intl.locale, 'fr-CA')
+  })
+
+  it('falls back to Accept-Language negotiation with catalog locales', async () => {
+    let context = new RequestContext(
+      new Request('https://example.com/', {
+        headers: { 'Accept-Language': 'fr-CA, en;q=0.5' },
+      }),
+    )
+    let middleware = intl({
+      defaultLocale: 'en',
+      catalogs: {
+        en: {},
+        fr: {},
+      },
+    })
+
+    await middleware(context, async () => new Response())
+
+    assert.equal(context.get(Locale), 'fr-CA')
+  })
+
+  it('falls back to the default locale when a resolved locale is invalid', async () => {
+    let context = new RequestContext(new Request('https://example.com/'))
+    let middleware = intl({
+      defaultLocale: 'en',
+      catalogs: { en: {} },
+      getLocale() {
+        return 'not a locale'
+      },
+    })
+
+    await middleware(context, async () => new Response())
+
+    assert.equal(context.get(Locale), 'en')
   })
 })

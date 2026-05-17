@@ -39,7 +39,6 @@ export interface IntlTranslatorOptions {
   locale: string
   defaultLocale: string
   catalogs: IntlCatalogs
-  fallbackLocales?: readonly string[] | ((locale: string) => readonly string[])
   intl?: RemixIntl
 }
 
@@ -175,23 +174,6 @@ class DefaultScopedTranslator implements ScopedTranslator {
 }
 
 function resolveFallbackChain(options: IntlTranslatorOptions): readonly string[] {
-  let fallbackLocales =
-    typeof options.fallbackLocales === 'function'
-      ? options.fallbackLocales(options.locale)
-      : options.fallbackLocales
-
-  if (fallbackLocales !== undefined) {
-    let locales: string[] = []
-    appendUnique(locales, options.locale)
-
-    for (let locale of fallbackLocales) {
-      appendUnique(locales, locale)
-    }
-
-    appendUnique(locales, options.defaultLocale)
-    return locales
-  }
-
   return createLocaleFallbacks(options.locale, options.defaultLocale)
 }
 
