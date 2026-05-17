@@ -30,6 +30,18 @@ describe('intl router', () => {
     assert.ok(html.includes('Montant à payer'))
   })
 
+  it('falls back from unsupported regional French to base French', async () => {
+    let response = await router.fetch('https://intl.test/?locale=fr-CA')
+
+    assert.equal(response.status, 200)
+
+    let html = await response.text()
+    assert.ok(html.includes('fr -&gt; en'))
+    assert.ok(html.includes('Internationalisation par requête'))
+    assert.ok(html.includes('Paiement'))
+    assert.ok(html.includes('Enregistrer les paramètres du compte'))
+  })
+
   it('returns 404 for unknown routes', async () => {
     let response = await router.fetch('https://intl.test/does-not-exist')
 
